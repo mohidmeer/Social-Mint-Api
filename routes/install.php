@@ -17,22 +17,19 @@ Route::get('/install', function () {
 
 
 Route::get('/config_cache_clear', function () {
-    $exitCode = Artisan::call('config:cache');
+    $e = Artisan::call('config:cache');
 });
 
 
-Route::get('/composer-du', function () { 
-    Artisan::call('dump:autoload');
+Route::get('/set_app_key', function () {
+    $e = Artisan::call('key:generate');
 });
+
+
+
 
 
 Route::get('/clear_cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode .= Artisan::call('view:clear');
-});
-
-
-Route::get('/clear_cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode .= Artisan::call('view:clear');
+    $e = Artisan::call('cache:clear');
+    $e = Artisan::call('view:clear');
 });
