@@ -46,7 +46,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 
 
-Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
+
 // Route::get('/home/discord', [DiscordController::class, 'index'])->name('discord');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/api', [FrontApiController::class, 'index'])->name('api');
@@ -67,7 +67,18 @@ Route::get('home/instagram/deauth', [InstagramController::class, 'deauthorize'])
 Route::get('home/instagram/deactivate/{id}', [InstagramController::class, 'deactivate'])->name('instagramdeactivate');
 Route::get('home/instagram/activate/{id}', [InstagramController::class, 'activate'])->name('instagramactivate');
 Route::get('home/instagram/login', [InstagramController::class, 'redirectToInstagram'])->name('instagramlogin');
-Route::get('home/instagram/callback', [InstagramController::class, 'handleFacebookCallback']);
+Route::get('home/instagram/callback', [InstagramController::class, 'handleInstagramCallback']);
+
+
+Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
+Route::get('home/twitter/deauth', [twitterController::class, 'deauthorize'])->name('twitterdeatuthorize');
+Route::get('home/twitter/deactivate/{id}', [twitterController::class, 'deactivate'])->name('twitterdeactivate');
+Route::get('home/twitter/activate/{id}', [twitterController::class, 'activate'])->name('twitteractivate');
+Route::get('home/twitter/login', [twitterController::class, 'redirectTotwitter'])->name('twitterlogin');
+Route::get('home/twitter/callback', [twitterController::class, 'handleTwitterCallback']);
+
+
+
 
 
 
