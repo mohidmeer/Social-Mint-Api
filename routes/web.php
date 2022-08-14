@@ -47,12 +47,10 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 
 Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
-Route::get('/home/instagram', [InstagramController::class, 'index'])->name('instagram');
 // Route::get('/home/discord', [DiscordController::class, 'index'])->name('discord');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/api', [FrontApiController::class, 'index'])->name('api');
 Route::get('/home/post', [FrontPostController::class, 'index'])->name('post');
-
 
 
 
@@ -64,46 +62,19 @@ Route::get('home/facebook/login', [FacebookController::class, 'redirectToFaceboo
 Route::get('home/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 
 
+Route::get('/home/instagram', [InstagramController::class, 'index'])->name('instagram');
+Route::get('home/instagram/deauth', [InstagramController::class, 'deauthorize'])->name('instagramdeatuthorize');
+Route::get('home/instagram/deactivate/{id}', [InstagramController::class, 'deactivate'])->name('instagramdeactivate');
+Route::get('home/instagram/activate/{id}', [InstagramController::class, 'activate'])->name('instagramactivate');
+Route::get('home/instagram/login', [InstagramController::class, 'redirectToInstagram'])->name('instagramlogin');
+Route::get('home/instagram/callback', [InstagramController::class, 'handleFacebookCallback']);
+
+
+
 Route::middleware(['auth'])->group(function () {
   
  
 });
-
-
-
-Route::get('/clear', function () {
-    \Cache::flush();
-    dd('cache cleared');
-});
-
-Route::get('/install', function () {
-    Illuminate\Support\Facades\Artisan::call('migrate:fresh', [
-        '--seed' => true
-    ]);
-});
-
-
-Route::get('/config_cache_clear', function () {
-    $exitCode = Artisan::call('config:cache');
-});
-
-
-Route::get('/composer-du', function () { 
-    Artisan::call('dump:autoload');
-});
-
-
-Route::get('/clear_cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode .= Artisan::call('view:clear');
-});
-
-
-Route::get('/clear_cache', function () {
-    $exitCode = Artisan::call('cache:clear');
-    $exitCode .= Artisan::call('view:clear');
-});
-
 
 
 
