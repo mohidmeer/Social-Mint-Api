@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/clear', function () {
-    \Cache::flush();
+    Cache::flush();
     dd('cache cleared');
 });
 
