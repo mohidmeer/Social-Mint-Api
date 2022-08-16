@@ -41,10 +41,9 @@ Route::get('/termsofservice', function () {
 Auth::routes();
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-
-
-
-
+Route::get('home/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+Route::get('home/instagram/callback', [InstagramController::class, 'handleInstagramCallback']);
+Route::get('home/twitter/callback', [twitterController::class, 'handleTwitterCallback']);
 
 
 
@@ -65,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/facebook/deactivate/{id}', [FacebookController::class, 'deactivate'])->name('deactivate');
     Route::get('home/facebook/activate/{id}', [FacebookController::class, 'activate'])->name('activate');
     Route::get('home/facebook/login', [FacebookController::class, 'redirectToFacebook'])->name('facebooklogin');
-    Route::get('home/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+    
 
 
     Route::get('/home/instagram', [InstagramController::class, 'index'])->name('instagram');
@@ -73,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/instagram/deactivate/{id}', [InstagramController::class, 'deactivate'])->name('instagramdeactivate');
     Route::get('home/instagram/activate/{id}', [InstagramController::class, 'activate'])->name('instagramactivate');
     Route::get('home/instagram/login', [InstagramController::class, 'redirectToInstagram'])->name('instagramlogin');
-    Route::get('home/instagram/callback', [InstagramController::class, 'handleInstagramCallback']);
+    
 
 
     Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
@@ -81,5 +80,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/twitter/deactivate/{id}', [twitterController::class, 'deactivate'])->name('twitterdeactivate');
     Route::get('home/twitter/activate/{id}', [twitterController::class, 'activate'])->name('twitteractivate');
     Route::get('home/twitter/login', [twitterController::class, 'redirectTotwitter'])->name('twitterlogin');
-    Route::get('home/twitter/callback', [twitterController::class, 'handleTwitterCallback']);
+    
 });
