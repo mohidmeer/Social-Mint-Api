@@ -6,25 +6,25 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6">
-                <h1 class="display-2 text-warning">Social Mint Api</h1>
+                <h1 class="display-2 text-warning">Social Mint Share</h1>
                 <p class="lead mt-4">Powerful APIs that enable you to send social media posts effortlessly. For developers and businesses of all sizes.Post to either your company's or your users' social media accounts with a few lines of code.</p>
-                <p><a href="/home" class="btn btn-success btn-lg mt-3" role="button">Get Started</a></p>
+                <p ><a href="/home" class="btn btn-warning  btn-lg mt-3" role="button">Get Started</a></p>
             </div>
-            <div class="col-md-6">
-                <img src="{{asset('assets/header.png')}}" class=" container rounded-10" alt="...">
-
+            <div class="col-md-6 d-none d-lg-block d-md-block ">
+                <img src="{{asset('assets/header.png')}}" class=" container-fluid shadow-sm rounded-3  " alt="...">
             </div>
         </div>
     </div>
 </header>
 <div class="spacer-100"></div>
 <div class="spacer-50"></div>
+<hr class=" border border-2 border-warning opacity-75 container">
 <section id="capabiliteis" class="mt-5">
     <div class="container">
-        <h1 class="display-4 text-warning  text-center mt-5">Social Mint Api Capabilities</h1>
+        <h1 class="display-4 text-warning  text-center mt-5">Social Mint Share Capabilities</h1>
         <div class="row mt-5">
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Facebook</h5>
                         <div class="text-center">
@@ -33,8 +33,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Instagram</h5>
                         <div class="text-center">
@@ -43,8 +43,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Twitter</h5>
                         <div class="text-center">
@@ -53,8 +53,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Linkden</h5>
                         <div class="text-center">
@@ -68,8 +68,8 @@
 
         </div>
         <div class="row mt-2">
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Youtube</h5>
                         <div class="text-center">
@@ -78,8 +78,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Discord</h5>
                         <div class="text-center">
@@ -88,8 +88,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Pintrest</h5>
                         <div class="text-center">
@@ -98,8 +98,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-dark">
+            <div class="col-lg-3 col-md-3 col-sm-6 ">
+                <div class="card  bg-transparent">
                     <div class="card-body">
                         <h5 class="card-title text-center">Reditt</h5>
                         <div class="text-center">
@@ -112,11 +112,12 @@
 </section>
 <div class="spacer-100"></div>
 <div class="spacer-50"></div>
+<hr class=" border border-2 border-warning opacity-75 container">
 <section>
     <div class="container ">
         <h1 class="display-5 text-warning  text-center mt-5">Create a Social Media Post with a Few Lines of Code</h1>
         <div class="row">
-            <div class="col-md-5 offset-2 ">
+            <div class="col-md-6 offset-0  ">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="" role="presentation">
                         <button class="btn btn-dark active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Php</button>
@@ -128,7 +129,7 @@
                         <button class="btn btn-dark " id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Nodejs</button>
                     </li>
                 </ul>
-                <div class="tab-content border border-dark " id="myTabContent">
+                <div class="tab-content border border-dark  " id="myTabContent">
                     <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
                         <pre>
                             <code class="php">
@@ -220,7 +221,7 @@ function publish(API_KEY) {
     </div>
 
 </section>
-
+<hr class=" border border-2 border-warning opacity-75 container">
 
 <script>
     hljs.highlightAll();
@@ -242,7 +243,7 @@ function publish(API_KEY) {
 
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center ">
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm bg-dark">
+        <div class="card mb-4 rounded-3 shadow-sm  bg-transparent">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Free</h4>
           </div>
@@ -259,7 +260,7 @@ function publish(API_KEY) {
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm bg-dark">
+        <div class="card mb-4 rounded-3 shadow-sm  bg-transparent">
           <div class="card-header py-3">
             <h4 class="my-0 fw-normal">Pro</h4>
           </div>
@@ -276,7 +277,7 @@ function publish(API_KEY) {
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-warning bg-dark">
+        <div class="card mb-4 rounded-3 shadow-sm border-warning  bg-transparent">
           <div class="card-header py-3 text-white bg-warning border-warning">
             <h4 class="my-0 fw-normal">Enterprise</h4>
           </div>
@@ -302,6 +303,43 @@ function publish(API_KEY) {
 
 
 </section>
+<hr class=" border border-2 border-warning opacity-50">
+    <div class="container ">
+  <footer class="py-5 ">
+    <div class="row">
+      <div class="col-2">
+        <h5>Social Mint Share</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+        </ul>
+      </div>
+
+
+      <div class="col-4 offset-5">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of whats new and exciting from us.</p>
+          <div class="d-flex w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="btn btn-warning" type="button">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between py-4 my-4 ">
+      <p>© 2021 Company, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex ">
+        <li class="ms-3"><a class="link-light" href="#"><i class="bi-facebook text-center"></i></a></li>
+        <li class="ms-3"><a class="link-light" href="#"><i class="bi-instagram text-center"></i></a></li>
+        <li class="ms-3"><a class="link-light" href="#"><i class="bi-twitter text-center"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
 
 
 @endsection
