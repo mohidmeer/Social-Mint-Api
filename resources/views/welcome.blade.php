@@ -11,7 +11,7 @@
                 <p ><a href="/home" class="btn btn-warning  btn-lg mt-3" role="button">Get Started</a></p>
             </div>
             <div class="col-md-6 d-none d-lg-block d-md-block ">
-                <img src="{{asset('assets/header.png')}}" class=" container-fluid shadow-sm rounded-3  " alt="...">
+                <img src="{{asset('assets/Header.png')}}" class=" container-fluid shadow-sm rounded-3  " alt="...">
             </div>
         </div>
     </div>
