@@ -1,7 +1,8 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 
-@import url("./bootstrap.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 @import url("./dracula.min.css");
+@import url("./bootstrap.css");
+
 .appcolor{
     /* background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%); */
 
