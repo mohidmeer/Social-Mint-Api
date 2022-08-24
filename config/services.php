@@ -34,5 +34,10 @@ return [
         'client_secret' => env('google_client_secret'),
         'redirect' => env('google_redirect'),
     ],
+    'facebook' => [
+        'client_id' => env('facebook_client_id'),
+        'client_secret' => env('facebook_client_secret'),
+        'redirect' => env('facebook_redirect'),
+    ],
 
 ];
