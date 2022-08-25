@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SocialMediaAccessTokens;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
 use App\Models\User;
@@ -41,6 +42,9 @@ class GoogleController extends Controller
                 $token = $newUser->createToken('auth_token')->plainTextToken;
                 $newUser->api_access_token = $token;
                 $newUser->save();
+                SocialMediaAccessTokens::create([
+                    'user_id' => $newUser['id'],
+                ])->save();
 
       
                 return redirect()->intended('home');
