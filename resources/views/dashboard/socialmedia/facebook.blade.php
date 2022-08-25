@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
 
+@include('dashboard.socialmedia.error')
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-2">
@@ -63,17 +64,17 @@
                             <tr>
                                 @foreach ($pages as $page)
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <th><img src="{{$page->img_url}}" alt="No Pic"></th>
+                                <th><img src="{{$page->img_url}}"  class="rounded-circle " alt="No Pic"></th>
                                 <td>{{$page['name']}}</td>
                                 <td>
                                     @if ($page['status']==1)
                                     <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('deactivate',  $page->page_id) }}" class="btn btn-primary text-white">
-                                    Allow Posting
-                                    </a>                    
+                                        Allow Posting
+                                    </a>
 
                                     @else
                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('activate', $page->page_id)  }}" class="btn btn-danger text-white">
-                                     Not Allowed
+                                        Not Allowed
                                     </a>
                                     @endif
 

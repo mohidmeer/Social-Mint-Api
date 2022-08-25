@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Facebook\Pages;
+use App\Models\Instagram\InstagramAccounts;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,13 +55,18 @@ class User extends Authenticatable
     //     'profile_photo_url',
     // ];
 
-    public function fbtoken()
+    public function Socialtoken()
     {
         return $this->hasOne(SocialMediaAccessTokens::class);
     }
     public function fbpages()
     {
         return $this->hasMany(Pages::class);
+    }
+    
+    public function instaAccounts()
+    {
+        return $this->hasMany(InstagramAccounts::class);
     }
 
 }

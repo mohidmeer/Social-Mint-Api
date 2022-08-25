@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagesTable extends Migration
+class CreateInstagramAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('instagram_accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('page_id');
             $table->string('name');
+            $table->string('profile_picture_url')->nullable();
+            $table->unsignedBigInteger('insta_business_id');
+            $table->text('page_id');
             $table->text('page_access_token');
-            $table->text('img_url')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -31,6 +34,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('instagram_accounts');
     }
 }

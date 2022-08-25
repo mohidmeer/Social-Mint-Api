@@ -17,6 +17,7 @@ class CreateSocialMediaAccessTokensTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('fb_access_token')->nullable();
+            $table->text('insta_access_token')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

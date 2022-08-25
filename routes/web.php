@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/home/instagram', [InstagramController::class, 'index'])->name('instagram');
-    Route::get('home/instagram/deauth', [InstagramController::class, 'deauthorize'])->name('instagramdeatuthorize');
+    Route::get('home/instagram/deauth', [InstagramController::class, 'deauthorize'])->name('instagramdeauthorize');
     Route::get('home/instagram/deactivate/{id}', [InstagramController::class, 'deactivate'])->name('instagramdeactivate');
     Route::get('home/instagram/activate/{id}', [InstagramController::class, 'activate'])->name('instagramactivate');
     Route::get('home/instagram/login', [InstagramController::class, 'redirectToInstagram'])->name('instagramlogin');

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Instagram;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SocialMediaAccessTokens extends Model
+class FacebookInstagramLinkedPages extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'user_id',
-        'fb_access_token',
-        'insta_access_token'
+        'page_access_token',
+        'name',
+        'page_id',
     ];
-
-    
 }
