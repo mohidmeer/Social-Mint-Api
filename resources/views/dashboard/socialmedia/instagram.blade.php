@@ -79,10 +79,12 @@
                                         
                                          <td>@if ($account['status']==1)
                                             <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('instagramdeactivate',$account->id) }}" class="  btn btn-primary text-white">Allow Posting</a>
+                                            <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white" >Unlink</a>
                                          @else
                                              <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('instagramactivate',$account->id)  }}" class="   btn btn-danger text-white">
                                                  Not Allowed
                                              </a>
+                                             <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white" >Unlink</a>
                                              @endif
 
                                          </td>

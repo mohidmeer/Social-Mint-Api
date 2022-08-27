@@ -83,11 +83,6 @@ class InstagramController extends Controller
 
 
 
-
-
-
-
-
         return view('dashboard.socialmedia.instagram');
     }
     public function deactivate($id)
@@ -100,6 +95,13 @@ class InstagramController extends Controller
     public function activate($id)
     {
         InstagramAccounts::where('id',$id)->update(['status'=>1]);
+        return redirect()->route('instagram');
+    }
+    public function unlinkaccount($id){
+
+        // Deleting Page for user 
+        InstagramAccounts::where('id',$id)->delete();
+
         return redirect()->route('instagram');
     }
 }

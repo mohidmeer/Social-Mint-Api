@@ -106,7 +106,14 @@ class FacebookController extends Controller
         return redirect()->route('facebook');
     }
 
+    public function unlinkpage($id){
 
+
+        // Deleting Page for user 
+        Pages::where('page_id',$id)->delete();
+
+        return redirect()->route('facebook');
+    }
 
 
 }

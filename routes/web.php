@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/facebook/deauth', [FacebookController::class, 'deauthorize'])->name('facebookdeauthorize');
     Route::get('home/facebook/deactivate/{id}', [FacebookController::class, 'deactivate'])->name('deactivate');
     Route::get('home/facebook/activate/{id}', [FacebookController::class, 'activate'])->name('activate');
+    Route::get('home/facebook/unlink/{id}', [FacebookController::class, 'unlinkpage'])->name('unlinkpage');
     Route::get('home/facebook/login', [FacebookController::class, 'redirectToFacebook'])->name('facebooklogin');
     
 
@@ -71,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/instagram/deauth', [InstagramController::class, 'deauthorize'])->name('instagramdeauthorize');
     Route::get('home/instagram/deactivate/{id}', [InstagramController::class, 'deactivate'])->name('instagramdeactivate');
     Route::get('home/instagram/activate/{id}', [InstagramController::class, 'activate'])->name('instagramactivate');
+    Route::get('home/instagram/unlink/{id}', [InstagramController::class, 'unlinkaccount'])->name('unlinkaccount');
     Route::get('home/instagram/login', [InstagramController::class, 'redirectToInstagram'])->name('instagramlogin');
     
 

@@ -70,12 +70,13 @@
                                     @if ($page['status']==1)
                                     <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('deactivate',  $page->page_id) }}" class="btn btn-primary text-white">
                                         Allow Posting
-                                    </a>
+                                    </a>&nbsp;&nbsp;<a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkpage',  $page->page_id) }}" class="btn btn-danger text-white">Unlink</a>
 
                                     @else
                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('activate', $page->page_id)  }}" class="btn btn-danger text-white">
                                         Not Allowed
-                                    </a>
+                                    </a> &nbsp;&nbsp;<a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkpage',  $page->page_id) }}" class="btn btn-danger text-white">Unlink</a>
+
                                     @endif
 
                                 </td>
