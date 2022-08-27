@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('facebook/pic',[FacebookController::class, 'postPic']);
+    
     Route::post('facebook/feed',[FacebookController::class, 'postFeed']);
-   
 
     Route::post('instagram/pic',[InstagramController::class, 'postPic']);
     
