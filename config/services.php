@@ -40,4 +40,11 @@ return [
         'redirect' => env('facebook_redirect'),
     ],
 
+    'twitter'=>[
+        'client_id' =>env('twitter_client_id'),
+        'client_secret' => env('twitter_client_secret'),
+        'redirect' => env('twitter_redirect')
+
+    ]
+
 ];
