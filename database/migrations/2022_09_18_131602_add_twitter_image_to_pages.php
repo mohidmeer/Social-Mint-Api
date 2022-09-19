@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTwitterTokens extends Migration
+class AddTwitterImageToPages extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddTwitterTokens extends Migration
     public function up()
     {
         Schema::table('social_media_access_tokens', function (Blueprint $table) {
-            $table->text('tw_access_token')->nullable();
-            $table->text('tw_secret_token')->nullable();
+            $table->string('tw_img_url')->nullable();
         });
     }
 
@@ -26,7 +25,7 @@ class AddTwitterTokens extends Migration
      */
     public function down()
     {
-        Schema::table('social_media_access_token', function (Blueprint $table) {
+        Schema::table('social_media_access_tokens', function (Blueprint $table) {
             //
         });
     }

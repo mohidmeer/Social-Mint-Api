@@ -12,7 +12,8 @@ class SocialMediaAccessTokens extends Model
     protected $fillable = [
         'user_id',
         'fb_access_token',
-        'insta_access_token'
+        'insta_access_token',
+        'tw_access_token'
     ];
 
     

@@ -34,8 +34,9 @@ class InstagramController extends Controller
 
     public function handleInstagramCallback(Request $request)
     {
+        
          // Making URL For Exchanging Code For Facebook Access Token
-         $AccessTokenUrl="https://graph.facebook.com/v14.0/oauth/access_token?client_id=".env('facebook_client_id')."&client_secret=".env('facebook_client_secret')."&redirect_uri=".env('instagram_redirect')."&code=".$request->code."";
+         $AccessTokenUrl="https://graph.facebook.com/v14.0/oauth/access_token?client_id=".config('services.facebook.client_id')."&client_secret=".config('services.facebook.client_secret')."&redirect_uri=".config('services.facebook.redirectinstagram')."&code=".$request->code."";
         
         // Getting Access Token From Facebook
         $AccessToken=Http::get($AccessTokenUrl);

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/test',function(){
-    return response('Online', 200);
+    return response(['Online',Auth::user()], 200);
 })->middleware('auth:sanctum');
-
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

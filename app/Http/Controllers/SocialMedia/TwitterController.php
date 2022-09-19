@@ -4,61 +4,90 @@ namespace App\Http\Controllers\SocialMedia;
 
 use App\Http\Controllers\Controller;
 use App\Models\SocialMediaAccessTokens;
+use Carbon\Carbon;
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
+
+use function PHPUnit\Framework\isNull;
+
 class TwitterController extends Controller
 {
 
     public function redirectToTwitter(){
         $state=Crypt::encryptString(Auth::user()->id);
-        $redirecturl='https://twitter.com/i/oauth2/authorize?response_type=code&client_id=bHFRTVU3TmxqMHloQTlvaXROSjQ6MTpjaQ&redirect_uri=http://localhost:8000/home/twitter/callback&scope=tweet.write+tweet.read+users.read+follows.read+offline.access&state='.$state.'&code_challenge=challenge&code_challenge_method=plain';
-        return redirect($redirecturl) ;
+        $connection = new TwitterOAuth(
+            config('services.twitter.consumer_key'),
+            config('services.twitter.consumer_secret'),
+            config('services.twitter.access_token'),
+            config('services.twitter.access_token_secret'),
+        );
+        $oauth_token = $connection->oauth("oauth/request_token?oauth_callback=http://localhost:8000/home/twitter/callback?state=state")['oauth_token'];
+
+        return redirect('https://api.twitter.com/oauth/authorize?oauth_token='.$oauth_token);
+
+
+
     }
 
+
+
     public function handleTwitterCallback(Request $request){
-        
-        $res= Http::asForm()->post('https://api.twitter.com/2/oauth2/token',
-        [
-             'code'=>$request->code,
-             'grant_type'=>'authorization_code',
-             'client_id'=>'bHFRTVU3TmxqMHloQTlvaXROSjQ6MTpjaQ',
-             'redirect_uri'=>'http://localhost:8000/home/twitter/callback',
-             'code_verifier'=>'challenge'
-         ]);
-         if (isset($res['error'])){ abort(404);}
-         $userid=Crypt::decryptString($request->state);
-         SocialMediaAccessTokens::where('user_id',$userid)
-         ->update([
-             'tw_access_token'=>$res['access_token'],
-             'tw_refresh_token'=>$res['refresh_token']
-           ]);
-          
+        $request->state;
+        $AccessTokens=Http::post("https://api.twitter.com/oauth/access_token?oauth_token=".$request->oauth_token."&oauth_verifier=".$request->oauth_verifier."");
          
-         return redirect()->route('twitter');
- 
-     }
+        // Condition for checing if we get the access token or not 
+        // if (!(isset($AccessTokens->oauth_token))){ return response($AccessTokens,404) ;}
+
+
+        $url = 'https://www.g.com/r?'.$AccessTokens;
+        $url_components = parse_url($url);
+         parse_str($url_components['query'], $params);
+        $userid=Auth::user()->id;
+        SocialMediaAccessTokens::where('user_id',Auth::user()->id)
+        ->update([
+            'tw_access_token'=>$params['oauth_token'],
+            'tw_secret_token'=>$params['oauth_token_secret'],
+            'tw_name'=>$params['screen_name'],
+        
+        ]);
+
+       
+         
+         return redirect()->route('twitter')->with('success',"successfully Connected");
+    }
    
-   
-     public function index()
+    public function index()
     {   
+        if(!(isNull( Auth::user()->Socialtoken['tw_access_token']))){ return view('dashboard.socialmedia.twitter');}
+
 
         return view('dashboard.socialmedia.twitter');
     }
    
     public function deauthorize(){
+        SocialMediaAccessTokens::where('user_id',Auth::user()->id)
+        ->update([
+            'tw_access_token'=>null,
+            'tw_secret_token'=>null,
+            'tw_name'=>null,
+            
+        ]);
+        return view ('dashboard.socialmedia.twitter');
+    }
 
 
 
-        return view ('dashboard.socialmedia.twitter');
-    }
-    public function deactivate(){
-        return view ('dashboard.socialmedia.twitter');
-    }
-    public function activate(){
-        return view ('dashboard.socialmedia.twitter');
-    }
+    // both functions not required till now 
+
+    // public function deactivate(){
+    //     return view ('dashboard.socialmedia.twitter');
+    // }
+    // public function activate(){
+    //     return view ('dashboard.socialmedia.twitter');
+    // }
 
 
   

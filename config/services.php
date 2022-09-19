@@ -37,14 +37,23 @@ return [
     'facebook' => [
         'client_id' => env('facebook_client_id'),
         'client_secret' => env('facebook_client_secret'),
-        'redirect' => env('facebook_redirect'),
+        'redirectfacebook' => env('facebook_redirect'),
+        'redirectinstagram' => env('instagram_redirect'),
     ],
 
     'twitter'=>[
-        'client_id' =>env('twitter_client_id'),
-        'client_secret' => env('twitter_client_secret'),
-        'redirect' => env('twitter_redirect')
+        'consumer_key' =>env('Twitter_Consumer_Key'),
+        'consumer_secret' => env('Twitter_Consumer_Secret'),
+        'access_token' => env('Twitter_Access_token'),
+        'access_token_secret' => env('Twitter_Access_token_Secret'),
+        'redirect' => env('Twitter_OAuth_Url'),
+        'callback' => env('Twitter_Callback_Uri'),
 
-    ]
+    ],
+    'socialmint'=>[
+        'redirect'=>env('Social_Mint_Redirect')
+
+    ],
+
 
 ];

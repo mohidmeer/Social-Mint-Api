@@ -28,6 +28,7 @@ Route::get('/', function () {
 Route::get('/docs', function () {
     return view('docs');
 })->name('docs');
+
 Route::get('/privacy-policy', function () {
     return view('privacypolicy');
 })->name('privacypolicy');
@@ -79,8 +80,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
     Route::get('home/twitter/deauth', [twitterController::class, 'deauthorize'])->name('twitterdeatuthorize');
-    Route::get('home/twitter/deactivate/{id}', [twitterController::class, 'deactivate'])->name('twitterdeactivate');
-    Route::get('home/twitter/activate/{id}', [twitterController::class, 'activate'])->name('twitteractivate');
+    // Route::get('home/twitter/deactivate/{id}', [twitterController::class, 'deactivate'])->name('twitterdeactivate');
+    // Route::get('home/twitter/activate/{id}', [twitterController::class, 'activate'])->name('twitteractivate');
     Route::get('home/twitter/login', [twitterController::class, 'redirectTotwitter'])->name('twitterlogin');
     
 });

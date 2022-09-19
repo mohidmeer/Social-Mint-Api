@@ -47,6 +47,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/SocialMediaApi.php'));
+
+            Route::prefix('api/socialmintshare')
+                ->middleware('api')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/Socialmintapi.php'));
+                
             // Route::prefix('dev')
             //     ->middleware('api')
             //     ->namespace($this->namespace)
