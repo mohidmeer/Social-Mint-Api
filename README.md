@@ -10,7 +10,7 @@
 | Parameter | Type     |     Description                |
 | :-------- | :------- |     :------------------------- |
 | `Header` | `Authorization` | **Required**. Your API key |
-| `message` | `string` | **Required**. Your  Status |
+| `message` | `string`       | **Required**. Your  Status |
 
 ### `Responses`
 You wil get Page Name and Post id In response
@@ -136,14 +136,6 @@ You wil get Page Name and Post id In response
 
 ```
 
-
-
-
-
-
-
-
-
 ## `Common Status Codes`
 
 | Status Code | Description |
@@ -156,7 +148,7 @@ You wil get Page Name and Post id In response
 
 
 
-# SocialMintShare Api Endpoints
+## SocialMintShare Api Endpoints
 
 These are Some API End points your website will use in order to integrate the Social Share feature,
 These Api Enpoints will Only work with `Socialmint` platform
