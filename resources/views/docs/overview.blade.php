@@ -146,7 +146,7 @@
 <code class="python">
 import requests
 import json
-reqUrl = "http://127.0.0.1:8000/api/test"
+reqUrl = "https://socialmintshare.net/api/test"
 
 headersList = {
  "Accept": "application/json",

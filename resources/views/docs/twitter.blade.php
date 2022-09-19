@@ -1,4 +1,4 @@
-<section id="twitter">
+<section id="twitter container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -20,7 +20,7 @@
                                             </span>
                                         </button>
                                         <small class="ml-2 font-weight-bold">
-                                            https://www.socialmint.com/api/twitter/<span class="text-success">feed</span>
+                                            https://socialmintshare.net/api/twitter/<span class="text-success">tweet</span>
                                         </small>
 
                                     </div>
@@ -77,7 +77,7 @@
 import requests
 import json
 
-reqUrl = "http://127.0.0.1:8000/api/twitter/feed"
+reqUrl = "http://socialmintshare.net/api/twitter/tweet"
 
 headersList = {
  "Accept": "application/json",
@@ -118,7 +118,7 @@ print(response.text)
                                             </span>
                                         </button>
                                         <small class="ml-2 font-weight-bold">
-                                            https://www.socialmint.com/api/twitter/<span class="text-success">pic</span>
+                                            https://socialmintshare.net/api/twitter/<span class="text-success">tweetMedia</span>
                                         </small>
 
                                     </div>
@@ -178,7 +178,7 @@ print(response.text)
 import requests
 import json
 
-reqUrl = "http://127.0.0.1:8000/api/twitter/feed"
+reqUrl = "https://socialmintshare.net/api/twitter/feed"
 
 headersList = {
  "Accept": "application/json",

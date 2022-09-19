@@ -77,7 +77,7 @@
 import requests
 import json
 
-reqUrl = "http://127.0.0.1:8000/api/facebook/feed"
+reqUrl = "https://127.0.0.1:8000/api/facebook/feed"
 
 headersList = {
  "Accept": "application/json",
@@ -118,7 +118,7 @@ print(response.text)
                                             </span>
                                         </button>
                                         <small class="ml-2 font-weight-bold">
-                                            https://www.socialmint.com/api/facebook/<span class="text-success">pic</span>
+                                            https://socialmintshare.net/api/facebook/<span class="text-success">pic</span>
                                         </small>
 
                                     </div>
@@ -178,7 +178,7 @@ print(response.text)
 import requests
 import json
 
-reqUrl = "http://127.0.0.1:8000/api/facebook/feed"
+reqUrl = "https://socialmintshare.net/api/facebook/feed"
 
 headersList = {
  "Accept": "application/json",
