@@ -5,12 +5,12 @@
 <header>
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-6">
+            <div class="col-md-12 col-lg-5 col-12 ">
                 <h1 class="display-2 text-warning">Social Mint Share</h1>
                 <p class="lead mt-4">Powerful APIs that enable you to send social media posts effortlessly. For developers and businesses of all sizes.Post to either your company's or your users' social media accounts with a few lines of code.</p>
                 <p ><a href="/home" class="btn btn-warning  btn-lg mt-3" role="button">Get Started</a></p>
             </div>
-            <div class="col-md-6 d-none d-lg-block d-md-block ">
+            <div class="col-md-7 d-none d-lg-block d-md-none ms-auto ">
                 <img src="{{asset('assets/Header.png')}}" class=" container-fluid shadow-sm rounded-3  " alt="...">
             </div>
         </div>
