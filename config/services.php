@@ -55,6 +55,11 @@ return [
         'client_secret'=>env('Reddit_Client_Secret'),
         'callback'=>env('Reddit_Callack_Uri'),
     ],
+    'telegram'=>[
+        'key'=>env('Telegram_Bot_Key')
+    ],
+
+
     'socialmint'=>[
         'redirect'=>env('Social_Mint_Redirect')
 
