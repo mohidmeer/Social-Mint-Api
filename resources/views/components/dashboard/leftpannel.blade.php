@@ -1,3 +1,19 @@
+@php
+$styleexp= (request()->is('home/facebook' )) 
+                     || (request()->is('home/instagram' )) 
+                     || (request()->is('home/twitter' ))
+                     || (request()->is('home/reddit' ))
+                     || (request()->is('home/telegram' ))
+                     ? 'active show' : '';
+
+$style= (request()->is('home/facebook' )) 
+                        || (request()->is('home/instagram' )) 
+                        || (request()->is('home/reddit' )) 
+                        || (request()->is('home/telegram' )) 
+                        || (request()->is('home/twitter' ))? 'true' : 'false';
+
+@endphp
+
 
 <aside id="left-panel" class="left-panel">
     <nav class="navbar navbar-expand-sm navbar-default">
@@ -9,13 +25,14 @@
                     <a href="{{route('home')}}"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
                 </li>
                 <li  class="menu-title">Social Media</li><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown {{ (request()->is('home/facebook' )) || (request()->is('home/instagram' )) || (request()->is('home/twitter' ))? 'active show' : '' }} ">
-                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="{{ (request()->is('home/facebook' )) || (request()->is('home/instagram' )) || (request()->is('home/twitter' ))? 'true' : 'false' }}"> <i class="menu-icon fa fa-cogs"></i>Accounts</a>
-                    <ul  class="sub-menu children dropdown-menu {{ (request()->is('home/facebook' )) || (request()->is('home/instagram' )) || (request()->is('home/twitter' ))? 'show' : '' }}">
+                <li class="menu-item-has-children dropdown {{ $styleexp  }} ">
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="{{ $style }}"> <i class="menu-icon fa fa-cogs"></i>Accounts</a>
+                    <ul  class="sub-menu children dropdown-menu {{ $styleexp }}">
                         <li id="{{Route::is('facebook') ? 'textact' : 'null'}}" ><i class=" fa fa-facebook"></i><a  href="{{route('facebook')}}">Facebook</a></li>
                         <li id="{{Route::is('instagram') ? 'textact' : 'null'}}" ><i class="fa fa-instagram"></i><a href="{{route('instagram')}}">Instagram </a></li>
                         <li id="{{Route::is('twitter') ? 'textact' : 'null'}}" ><i class="fa fa-twitter"></i><a href="{{route('twitter')}}">Twitter</a></li>
                         <li id="{{Route::is('reddit') ? 'textact' : 'null'}}" ><i class="fa fa-reddit"></i><a href="{{route('reddit')}}">Reddit</a></li>
+                        <li id="{{Route::is('telegram') ? 'textact' : 'null'}}" ><i class="fa fa-telegram"></i><a href="{{route('telegram')}}">Telegram</a></li>
                     </ul>
                 </li>
 
