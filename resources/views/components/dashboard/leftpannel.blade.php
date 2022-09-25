@@ -15,6 +15,7 @@
                         <li id="{{Route::is('facebook') ? 'textact' : 'null'}}" ><i class=" fa fa-facebook"></i><a  href="{{route('facebook')}}">Facebook</a></li>
                         <li id="{{Route::is('instagram') ? 'textact' : 'null'}}" ><i class="fa fa-instagram"></i><a href="{{route('instagram')}}">Instagram </a></li>
                         <li id="{{Route::is('twitter') ? 'textact' : 'null'}}" ><i class="fa fa-twitter"></i><a href="{{route('twitter')}}">Twitter</a></li>
+                        <li id="{{Route::is('reddit') ? 'textact' : 'null'}}" ><i class="fa fa-reddit"></i><a href="{{route('reddit')}}">Reddit</a></li>
                     </ul>
                 </li>
 

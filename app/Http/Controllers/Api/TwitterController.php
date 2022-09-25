@@ -22,7 +22,7 @@ class TwitterController extends Controller
             'img_url' =>  'required|url' ]);
 
          $SocialTokens=Auth::user()->Socialtoken;
-         if (!(isset($SocialTokens->tw_name))){ return response('No Twitter Account Linked');           }
+         if (!(isset($SocialTokens->tw_name))){ return response('No Twitter Account Linked');}
          $status=$request->message;
          $img_url=$request->img_url;
          

@@ -50,6 +50,11 @@ return [
         'callback' => env('Twitter_Callback_Uri'),
 
     ],
+    'reddit'=>[
+        'client_id'=>env('Reddit_Client_id'),
+        'client_secret'=>env('Reddit_Client_Secret'),
+        'callback'=>env('Reddit_Callack_Uri'),
+    ],
     'socialmint'=>[
         'redirect'=>env('Social_Mint_Redirect')
 

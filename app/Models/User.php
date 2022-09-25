@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
+use App\Models\Reditt\Reditt;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,6 +68,10 @@ class User extends Authenticatable
     public function instaAccounts()
     {
         return $this->hasMany(InstagramAccounts::class);
+    }
+    public function Reditt()
+    {
+        return $this->hasOne(Reditt::class);
     }
 
    

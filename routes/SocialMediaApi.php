@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\FacebookController;
 use App\Http\Controllers\Api\InstagramController;
 use App\Http\Controllers\Api\TwitterController;
+use App\Http\Controllers\Api\RedditController;
 use App\Http\Requests\PostFacebookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('twitter/tweet',[TwitterController::class, 'PostTweet']);
     
     Route::post('twitter/tweetMedia',[TwitterController::class, 'PostMediaTweet']);
+
+
+    Route::post('reddit/feed',[RedditController::class, 'Postmessage']);
+  
+    Route::post('reddit/pic',[RedditController::class, 'PostMedia']);
+
+    
     
 });
+
+  
 
 Route::fallback(function(){
     return response()->json([

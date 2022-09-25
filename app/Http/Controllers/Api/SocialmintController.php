@@ -19,6 +19,8 @@ use League\OAuth1\Client\Server\Twitter;
 class SocialmintController extends Controller
 {
 
+
+
     // facebook callback
     public function facebookcallback(Request $request)
     {
@@ -73,7 +75,7 @@ class SocialmintController extends Controller
             $DbPageTokken->save();
         }
 
-        return redirect(env('Social_Mint_Redirect'), 201,);
+        return redirect(config('services.socialmint.redirect'), 201);
     }
 
 
@@ -123,7 +125,7 @@ class SocialmintController extends Controller
         }
 
 
-        return redirect(env('Social_Mint_Redirect'), 201,);
+        return redirect(config('services.socialmint.redirect'), 201);
     }
 
 
@@ -184,7 +186,7 @@ class SocialmintController extends Controller
                 'tw_img_url'=>$imgurl->profile_image_url_https
 
             ]);
-        return redirect(env('Social_Mint_Redirect'), 201,);
+        return redirect(config('services.socialmint.redirect'), 201);
     }
 
 
@@ -193,14 +195,16 @@ class SocialmintController extends Controller
     public function AccountsData()
     { 
         $facebook = array("Status"  =>  false,   "Multiple_Accounts" => false, "Name" => " No Account Linked",);
-        $instagram = array("Status"  => false,  "Multiple_Accounts" => false, "Name" => " No Account Linked",);
+        $instagram = array("Status"  => false,  "Multiple_Accounts" => false,  "Name" => " No Account Linked",);
         $twitter =  array("Status"  =>  false,   "Multiple_Accounts" => false, "Name" => " No Account Linked",);
+        $reddit =  array("Status"  =>  false,   "Multiple_Accounts" => false,  "Name" => " No Account Linked",);
 
 
         // Get The Auth User Data Pages And Accounts
         $Facebook_Pages = Auth::user()->fbpages;
         $InstaAccounts  = Auth::user()->instaAccounts;
         $TwitterAccounts = Auth::user()->Socialtoken;
+        $RedditAccount=Auth::user()->Reddit;
 
         // we will check that accounts are more than two for facebook and instagram 
 
@@ -244,9 +248,20 @@ class SocialmintController extends Controller
             $twitter["ImgUrl"] =$TwitterAccounts->tw_img_url;
         }
 
-        // return $twitter;
+        if (isset($RedditAccount->name)){
+            $reddit["Status"]=true;
+            $reddit["Status"]=$RedditAccount->name;
+            $reddit["ImgUrl"]=$RedditAccount->avatar_url;
+        }
 
-        $Accounts = array("facebook" => $facebook, "instagram" => $instagram, "twitter" => $twitter);
+        
+        
+
+        $Accounts = array(
+            "facebook" => $facebook,
+            "instagram" => $instagram,
+            "twitter" => $twitter,
+            "reddit"=>$reddit);
         return response($Accounts, 200);
     }
 

@@ -19,6 +19,7 @@ Route::get('/instagram/callback',[SocialmintController::class,'instacallback']);
 
 
 
+
 Route::post('/signup',[SocialmintController::class,'signup']);
 Route::get('/twitterredirect',[SocialmintController::class,'twitterurlredirectgenarator'])->middleware(['auth:sanctum']);
 Route::get('/accounts',[SocialmintController::class,'AccountsData'])->middleware(['auth:sanctum']);

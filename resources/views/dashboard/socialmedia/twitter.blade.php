@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+@include('dashboard.socialmedia.error')
 <div class="container">
     @isset(Auth::user()->Socialtoken['tw_name'])
     <div style="height:300px ;">
