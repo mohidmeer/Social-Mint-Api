@@ -99,7 +99,7 @@ Route::middleware(['auth'])->group(function () {
 
     // telegram Routes
     Route::get('/home/telegram', [TelegramController::class, 'index'])->name('telegram'); 
-    Route::post('/home/telegram', [TelegramController::class, 'save'])->name('savename'); 
+    Route::post('/home/telegram', [TelegramController::class, 'save'])->name('savename');
 
 
 });
