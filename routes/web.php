@@ -9,6 +9,7 @@ use App\Http\Controllers\SocialMedia\FacebookController;
 use App\Http\Controllers\SocialMedia\InstagramController;
 use App\Http\Controllers\SocialMedia\TwitterController;
 use App\Http\Controllers\SocialMedia\RedittController;
+use App\Http\Controllers\SocialMedia\TelegramController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/reddit', [RedittController::class, 'index'])->name('reddit');   
     Route::get('/home/reddit/deauth', [RedittController::class, 'deauthorize'])->name('redditdeatuthorize');   
     Route::get('/home/reddit/login', [RedittController::class, 'redirectToReddit'])->name('redditlogin');   
+
+
+
+
+
+    // telegram Routes
+    Route::get('/home/telegram', [TelegramController::class, 'index'])->name('telegram'); 
+    Route::post('/home/telegram', [TelegramController::class, 'save'])->name('savename'); 
 
 
 });
