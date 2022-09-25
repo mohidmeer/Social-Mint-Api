@@ -26,7 +26,7 @@
                 <div class="card-body">
 
                     @isset( Auth::user()->Telegram['name'] )
-                    <a href="{{route('redditdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
+                    <a href="{{route('telegramdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
                         <h4>
                             <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
                         </h4>
@@ -34,7 +34,7 @@
 
                     @endisset
                     @empty(Auth::user()->Telegram['name'] )
-                    <a href="{{route('redditlogin')}}" class="text-white btn btn-block bg-reddit p-4">
+                    <a href="" class="text-white btn btn-block bg-reddit p-4">
                         <h2>
                             <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;</i> Connect Your Telegram
                         </h2>
