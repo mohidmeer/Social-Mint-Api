@@ -2,7 +2,7 @@
 @section('content')
 @include('dashboard.socialmedia.error')
 <div class="container">
-    @isset(Auth::user()->Reditt['name'])
+    @isset(Auth::user()->Telegram['name'])
     <div style="height:300px ;">
     </div>
     @endisset
@@ -10,13 +10,13 @@
         <div class="col-md-6 offset-2">
             <div class="card">
                 <div class="card-header">
-                    <strong>Reddit</strong>
-                    @isset(Auth::user()->Reditt['name'])
+                    <strong>Telegram</strong>
+                    @isset(Auth::user()->Telegram['name'])
                     <small>
-                        {{Auth::user()->Reditt['name']}}
+                        {{Auth::user()->Telegram['name']}}
                     </small>
                     @endisset
-                    @empty(Auth::user()->Reditt['name'])
+                    @empty(Auth::user()->Telegram['name'])
                     <small>
                         Link your account
                     </small>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
 
-                    @isset( Auth::user()->Reditt['name'] )
+                    @isset( Auth::user()->Telegram['name'] )
                     <a href="{{route('redditdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
                         <h4>
                             <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
@@ -33,10 +33,10 @@
                     </a>
 
                     @endisset
-                    @empty(Auth::user()->Reditt['name'] )
+                    @empty(Auth::user()->Telegram['name'] )
                     <a href="{{route('redditlogin')}}" class="text-white btn btn-block bg-reddit p-4">
                         <h2>
-                            <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;</i> Login With Reddit
+                            <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;</i> Connect Your Telegram
                         </h2>
                     </a>
                     @endempty

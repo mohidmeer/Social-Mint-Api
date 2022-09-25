@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\Reditt\Reditt;
+use App\Models\Telegram\Telegram;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -72,6 +73,10 @@ class User extends Authenticatable
     public function Reditt()
     {
         return $this->hasOne(Reditt::class);
+    }
+    public function Telegram()
+    {
+        return $this->hasOne(Telegram::class);
     }
 
    
