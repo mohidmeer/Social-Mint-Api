@@ -10,7 +10,7 @@
  @endif
  <div class="container mt-2">
      <div class="row">
-         <div class="col-md-6 offset-2">
+         <div class="col-lg-6 offset-lg-2 col-md-8 col-sm-12 offset-md-1 offset-sm-0 ">
              <div class="card">
                  <div class="card-header">
                      <strong>Instagram</strong>

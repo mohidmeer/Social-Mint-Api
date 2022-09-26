@@ -13,10 +13,9 @@ class TelegramController extends Controller
 
     public function index(){
 
-
         return view ('dashboard.socialmedia.telegram');
 
-
+        
     }
 
     public function save(Request $request){
@@ -33,12 +32,16 @@ class TelegramController extends Controller
 
         return redirect()->route('telegram')->with('success','Telegram Name Added Make Sure to Send Test Message');
 
+    }
+    
+    public function deauthorize(){
 
+       Telegram::where('user_id',Auth::user()->id)->delete();
 
+       return redirect()->route('telegram')->with('success','Telegram Account Name Removed Successfully');
 
 
     }
-    
 
 
 
