@@ -24,7 +24,7 @@ class TwitterController extends Controller
             config('services.twitter.access_token'),
             config('services.twitter.access_token_secret'),
         );
-        $oauth_token = $connection->oauth("oauth/request_token?oauth_callback=http://localhost:8000/home/twitter/callback?state=state")['oauth_token'];
+        $oauth_token = $connection->oauth("oauth/request_token?oauth_callback=".config('services.twitter.callbackWeb')."?state=state")['oauth_token'];
 
         return redirect('https://api.twitter.com/oauth/authorize?oauth_token='.$oauth_token);
 
