@@ -48,6 +48,7 @@ return [
         'access_token_secret' => env('Twitter_Access_token_Secret'),
         'redirect' => env('Twitter_OAuth_Url'),
         'callback' => env('Twitter_Callback_Uri'),
+        'callbackWeb' => env('Twitter_Callback_UriWEB'),
 
     ],
     'reddit'=>[
