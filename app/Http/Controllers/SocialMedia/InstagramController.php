@@ -25,7 +25,7 @@ class InstagramController extends Controller
 
     public function redirectToInstagram()
     {
-        $facebookauthorizeurl = "https://www.facebook.com/v14.0/dialog/oauth?client_id=".env('facebook_client_id')."&redirect_uri=" . env('instagram_redirect')
+        $facebookauthorizeurl = "https://www.facebook.com/v14.0/dialog/oauth?client_id=".config('services.facebook.client_id')."&redirect_uri=" . config('services.facebook.redirectinstagram')
         ."&scope=instagram_basic,instagram_content_publish,pages_read_engagement,pages_show_list";
         return redirect($facebookauthorizeurl);
         
