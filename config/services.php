@@ -66,5 +66,14 @@ return [
 
     ],
 
+    'discord'=>[
+        'clientId'=>env('Discord_Client_Id'),
+        'clientSecret'=>env('Discord_Client_Secret'),
+        'RedirectUrlWeb'=>env('Discord_Redirect_Web'),
+        'WebRedirectUri'=>env('Discord_Web_Uri'),
+        'ClientRedirectUri'=>env('Discord_Client_Uri'),
+        'RedirectUrlClient'=>env('Discord_Redirect_Client'),
+    ]
+
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Discord\Discord;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\Reditt\Reditt;
@@ -77,6 +78,11 @@ class User extends Authenticatable
     public function Telegram()
     {
         return $this->hasOne(Telegram::class);
+    }
+
+    public function Discord()
+    {
+        return $this->hasOne(Discord::class);
     }
 
    

@@ -103,4 +103,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/telegram/deauth', [TelegramController::class, 'deauthorize'])->name('telegramdeatuthorize');
 
 
+
+
+    // Discord Routes
+
+    
 });
