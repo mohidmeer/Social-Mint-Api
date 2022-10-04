@@ -30,16 +30,16 @@
 
                      @isset(Auth::user()->Socialtoken['insta_access_token'])
                      <a href="{{route('instagramdeauthorize')}}" class="text-white btn btn-block btn-danger p-4">
-                         <h4>
+                         <h3>
                              <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
-                         </h4>
+                         </h3>
                      </a>
                      @endisset
                      @empty(Auth::user()->Socialtoken['insta_access_token'])
                      <a href="{{route('instagramlogin')}}" class="text-white btn btn-block bg-instagram p-4">
-                         <h4>
+                         <h3>
                              <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;</i> Login With instagram
-                         </h4>
+                         </h3>
                      </a>
                      @endempty
                  </div>
@@ -47,65 +47,65 @@
          </div>
      </div>
  </div>
-
  <div class="contain">
-     <div class="row">
-                 <div class="col-lg-12">
-                     <div class="card">
-                         <div class="card-header">
-                             <strong class="card-title">Accounts</strong>
-                         </div>
-                         <div class="table-stats order-table ov-h">
-                             <table class="table">
-                                 @isset($InstaAccounts)
-                                 <thead>
-                                     <tr>
-                                         <th class="serial">#</th>
-                                         <th class="avatar">Avtar</th>
-                                         <th>Name</th>
-                                         <th>Action</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     @foreach ($InstaAccounts as $account)
-                                     <tr>
-                                         <td class="serial">{{$loop->iteration}}</td>
-                                         <td class="avatar">
-                                             <div class="round-img">
-                                                 <a href="#"><img class="rounded-circle" src="{{$account->profile_picture_url}}" alt=""></a>
-                                             </div>
-                                         </td>
-                                         <td class=" font-weight-bold"> {{$account->name}} </td>
-                                        
-                                         <td>@if ($account['status']==1)
-                                            <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('instagramdeactivate',$account->id) }}" class="  btn btn-primary text-white">Allow Posting</a>
-                                            <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white" >Unlink</a>
-                                         @else
-                                             <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('instagramactivate',$account->id)  }}" class="   btn btn-danger text-white">
-                                                 Not Allowed
-                                             </a>
-                                             <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white" >Unlink</a>
-                                             @endif
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Linked Pages</strong>
+                </div>
+                @isset($pages)
+                <div class="card-body">
+                @isset($InstaAccounts)
+                         <thead>
+                             <tr>
+                                 <th class="serial">#</th>
+                                 <th class="avatar">Avtar</th>
+                                 <th>Name</th>
+                                 <th>Action</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach ($InstaAccounts as $account)
+                             <tr>
+                                 <td class="serial">{{$loop->iteration}}</td>
+                                 <td class="avatar">
+                                     <div class="round-img">
+                                         <a href="#"><img class="rounded-circle" src="{{$account->profile_picture_url}}" alt=""></a>
+                                     </div>
+                                 </td>
+                                 <td class=" font-weight-bold"> {{$account->name}} </td>
 
-                                         </td>
-                                     </tr>
-                                     @endforeach
-                                 </tbody>
-                             </table>
-                             @endisset
-                         </div> <!-- /.table-stats -->
-                     </div>
-                 </div>
-                 @empty(Auth::user()->instaAccounts[0])
-                 <div class=" card-body">
-                     <h2 class="  ">
-                         No Business Account Linked
-                     </h2>
-                 </div>
-                 @endempty
-             </div>
-         </div>
-     </div>
- </div>
- 
+                                 <td>@if ($account['status']==1)
+                                     <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('instagramdeactivate',$account->id) }}" class="  btn btn-primary text-white">Allow Posting</a>
+                                     <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white">Unlink</a>
+                                     @else
+                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('instagramactivate',$account->id)  }}" class="   btn btn-danger text-white">
+                                         Not Allowed
+                                     </a>
+                                     <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white">Unlink</a>
+                                     @endif
+
+                                 </td>
+                             </tr>
+                             @endforeach
+                         </tbody>
+                     </table>
+                     @endisset
+                </div>
+                @endisset
+                @empty(Auth::user()->instaAccounts[0])
+                <div class="card-body">
+                    <h2>
+                    No Business Account Linked
+                    </h2>
+                </div>
+                @endempty
+
+        </div>
+    </div>
+</div>
+
  @endsection
+
+

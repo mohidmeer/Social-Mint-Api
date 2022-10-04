@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
@@ -83,6 +84,11 @@ class User extends Authenticatable
     public function Discord()
     {
         return $this->hasOne(Discord::class);
+    }
+
+    public function DChannels()
+    {
+        return $this->hasMany(Channels::class);
     }
 
    

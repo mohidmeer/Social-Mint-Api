@@ -64,7 +64,7 @@ class InstagramController extends Controller
                 InstagramAccounts::create([
                     'user_id' =>  Auth::user()->id, 
                     'name'=> $Accountname['username'],
-                    'profile_picture_url'=> $Accountname['profile_picture_url'],
+                    'profile_picture_url'=> isset($Accountname['profile_picture_url']) ? $Accountname['profile_picture_url'] : null   ,
                     'insta_business_id'=> $account['instagram_business_account']['id'],
                     'page_access_token'=>$account['access_token'],
                     'page_id' => $account['id']])->save();

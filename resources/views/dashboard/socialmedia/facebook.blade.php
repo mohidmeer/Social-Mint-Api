@@ -24,17 +24,17 @@
 
                     @isset($access_token['fb_access_token'])
                     <a href="{{route('facebookdeauthorize')}}" class="text-white btn btn-block btn-danger p-4">
-                        <h4>
+                        <h2>
                             <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
-                        </h4>
+                        </h2>
                     </a>
 
                     @endisset
                     @empty($access_token['fb_access_token'])
                     <a href="{{route('facebooklogin')}}" class="text-white btn btn-block btn-primary p-4">
-                        <h4>
+                        <h2>
                             <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;</i> Login With Facebook
-                        </h4>
+                        </h2>
                     </a>
                     @endempty
                 </div>

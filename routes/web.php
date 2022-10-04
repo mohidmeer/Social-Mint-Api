@@ -5,11 +5,13 @@ use App\Http\Controllers\FrontPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\SocialMedia\DiscordController;
 use App\Http\Controllers\SocialMedia\FacebookController;
 use App\Http\Controllers\SocialMedia\InstagramController;
 use App\Http\Controllers\SocialMedia\TwitterController;
 use App\Http\Controllers\SocialMedia\RedittController;
 use App\Http\Controllers\SocialMedia\TelegramController;
+use App\Models\Discord\Discord;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,7 @@ Route::get('home/facebook/callback', [FacebookController::class, 'handleFacebook
 Route::get('home/instagram/callback', [InstagramController::class, 'handleInstagramCallback']);
 Route::get('home/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
 Route::get('home/reddit/callback', [RedittController::class, 'handleRedditCallback']);
+Route::get('home/discord/callback', [DiscordController::class, 'handleDiscordCallback']);
 
 
 
@@ -94,18 +97,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/reddit/login', [RedittController::class, 'redirectToReddit'])->name('redditlogin');   
 
 
-
-
-
     // telegram Routes
     Route::get('/home/telegram', [TelegramController::class, 'index'])->name('telegram'); 
     Route::post('/home/telegram', [TelegramController::class, 'save'])->name('savename');
     Route::get('/home/telegram/deauth', [TelegramController::class, 'deauthorize'])->name('telegramdeatuthorize');
 
 
-
-
     // Discord Routes
+    Route::get('/home/discord', [DiscordController::class, 'index'])->name('discord'); 
+    Route::get('/home/discord/login', [DiscordController::class, 'RedirectToDiscord'])->name('discordlogin');
+    Route::get('/home/discord/deauth', [DiscordController::class, 'deauthorize'])->name('discorddeauthorize'); 
+    Route::get('home/discord/deactivate/{id}', [DiscordController::class, 'deactivate'])->name('discordeactivate');
+    Route::get('home/discord/activate/{id}', [DiscordController::class, 'activate'])->name('discordactivate');
+    Route::get('home/discord/unlink/{id}', [DiscordController::class, 'unlink'])->name('unlinkchannel');
+   
+
+
+   
 
     
 });

@@ -27,17 +27,17 @@
 
                     @isset( Auth::user()->Socialtoken['tw_name'] )
                     <a href="{{route('twitterdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
-                        <h4>
+                        <h2>
                             <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
-                        </h4>
+                        </h2>
                     </a>
 
                     @endisset
                     @empty(Auth::user()->Socialtoken['tw_name'] )
                     <a href="{{route('twitterlogin')}}" class="text-white btn btn-block bg-twitter p-4">
-                        <h4>
+                        <h2>
                             <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;</i> Login With twitter
-                        </h4>
+                        </h2>
                     </a>
                     @endempty
                 </div>

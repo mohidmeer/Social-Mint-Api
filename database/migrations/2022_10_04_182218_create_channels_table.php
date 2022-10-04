@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiscordsTable extends Migration
+class CreateChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateDiscordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discords', function (Blueprint $table) {
+        Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->text('avatar')->nullable();
-            $table->text('guild')->nullable();
-            $table->string('access_token');
-            $table->string('refresh_token');
+            $table->string('channel_id');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateDiscordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discords');
+        Schema::dropIfExists('channels');
     }
 }

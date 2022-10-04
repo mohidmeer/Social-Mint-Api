@@ -27,9 +27,9 @@
 
                     @isset( Auth::user()->Reditt['name'] )
                     <a href="{{route('redditdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
-                        <h4>
+                        <h3>
                             <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
-                        </h4>
+                        </h3>
                     </a>
 
                     @endisset
