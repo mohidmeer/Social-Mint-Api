@@ -41,7 +41,7 @@ class DiscordController extends Controller
         'client_id'     =>config('services.discord.clientId'),
         'client_secret' =>config('services.discord.clientSecret'),
         'grant_type'    =>'authorization_code',
-        'code'=>$request->code,
+        'code'          =>$request->code,
         'redirect_uri'  =>config('services.discord.WebRedirectUri')
     ]);
 
@@ -115,6 +115,14 @@ class DiscordController extends Controller
     return redirect()->route('discord')->with('success','Deleted Successfully');
 
    }
+
+
+  public function deactivate($id){
+
+    Channels::where('channel_id',$id)->update(['status'=>0]);
+
+    return redirect()->route('discord')->with('success','Activated Deactivated');
+  }
 
   
    
