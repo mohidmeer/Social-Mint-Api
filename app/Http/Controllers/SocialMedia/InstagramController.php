@@ -14,7 +14,7 @@ class InstagramController extends Controller
     public function index()
     {
         if (empty(Auth::user()->Socialtoken['insta_access_token'])){return view('dashboard.socialmedia.instagram');}
-        $InstaAccounts=Auth::user()->instaAccounts;
+         $InstaAccounts=Auth::user()->instaAccounts;
         $fbusername=Http::withToken(Auth::user()->Socialtoken['insta_access_token'])->get('https://graph.facebook.com/me');
 
 

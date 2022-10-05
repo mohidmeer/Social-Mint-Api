@@ -47,6 +47,8 @@
          </div>
      </div>
  </div>
+
+
  <div class="contain">
     <div class="row">
         <div class="col-12">
@@ -54,36 +56,37 @@
                 <div class="card-header">
                     <strong class="card-title">Linked Pages</strong>
                 </div>
-                @isset($pages)
                 <div class="card-body">
+                <div class="table-stats order-table ov-h">
+                    <table class="table">
                 @isset($InstaAccounts)
-                         <thead>
-                             <tr>
-                                 <th class="serial">#</th>
-                                 <th class="avatar">Avtar</th>
-                                 <th>Name</th>
-                                 <th>Action</th>
-                             </tr>
+                         <thead >
+                         <tr>
+                                         <th class="serial">#</th>
+                                         <th class="avatar">Avtar</th>
+                                         <th>Name</th>
+                                         <th>Action</th>
+                                     </tr>
                          </thead>
                          <tbody>
                              @foreach ($InstaAccounts as $account)
                              <tr>
                                  <td class="serial">{{$loop->iteration}}</td>
                                  <td class="avatar">
-                                     <div class="round-img">
-                                         <a href="#"><img class="rounded-circle" src="{{$account->profile_picture_url}}" alt=""></a>
+                                     <div class="round-img">    
+                                         <a href="#"><img class="rounded-circle"   src="{{$account->profile_picture_url}}" alt=""></a>
                                      </div>
                                  </td>
-                                 <td class=" font-weight-bold"> {{$account->name}} </td>
+                                 <td class=" ml-auto font-weight-bold"> {{$account->name}} </td>
 
                                  <td>@if ($account['status']==1)
-                                     <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('instagramdeactivate',$account->id) }}" class="  btn btn-primary text-white">Allow Posting</a>
-                                     <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white">Unlink</a>
+                                     <a data-toggle="tooltip" data-placement="right" title="Disable"  href="{{route('instagramdeactivate',$account->id)}}" class="btn btn-primary text-white">Allowed</a>
+                                     <a data-toggle="tooltip" data-placement="right" title="delete"   href="{{route('unlinkaccount',$account->id)}}"       class="btn btn-danger text-white">Delete</a>
                                      @else
-                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('instagramactivate',$account->id)  }}" class="   btn btn-danger text-white">
-                                         Not Allowed
+                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('instagramactivate',$account->id)}}" class="btn btn-danger text-white">
+                                          Allow
                                      </a>
-                                     <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkaccount',$account->id) }}" class="  btn btn-danger text-white">Unlink</a>
+                                     <a data-toggle="tooltip" data-placement="right" title="delete"   href="{{route('unlinkaccount',$account->id) }}"       class="btn btn-danger text-white">Delete</a>
                                      @endif
 
                                  </td>
@@ -91,7 +94,7 @@
                              @endforeach
                          </tbody>
                      </table>
-                     @endisset
+                     </div>
                 </div>
                 @endisset
                 @empty(Auth::user()->instaAccounts[0])
@@ -105,6 +108,9 @@
         </div>
     </div>
 </div>
+
+
+                          
 
  @endsection
 
