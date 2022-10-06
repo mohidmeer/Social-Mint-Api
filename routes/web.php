@@ -11,6 +11,7 @@ use App\Http\Controllers\SocialMedia\InstagramController;
 use App\Http\Controllers\SocialMedia\TwitterController;
 use App\Http\Controllers\SocialMedia\RedittController;
 use App\Http\Controllers\SocialMedia\TelegramController;
+use App\Http\Controllers\SocialMedia\PintrestController;
 use App\Models\Discord\Discord;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -51,7 +52,7 @@ Route::get('home/instagram/callback', [InstagramController::class, 'handleInstag
 Route::get('home/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
 Route::get('home/reddit/callback', [RedittController::class, 'handleRedditCallback']);
 Route::get('home/discord/callback', [DiscordController::class, 'handleDiscordCallback']);
-
+Route::get('/home/pintrest/callback', [PintrestController::class, 'handlePintrestCallback']);
 
 
 
@@ -94,7 +95,14 @@ Route::middleware(['auth'])->group(function () {
     //Reddit Routes
     Route::get('/home/reddit', [RedittController::class, 'index'])->name('reddit');   
     Route::get('/home/reddit/deauth', [RedittController::class, 'deauthorize'])->name('redditdeatuthorize');   
-    Route::get('/home/reddit/login', [RedittController::class, 'redirectToReddit'])->name('redditlogin');   
+    Route::get('/home/reddit/login', [RedittController::class, 'redirectToReddit'])->name('redditlogin'); 
+    
+    
+
+    // Pintrest Routes
+    Route::get('/home/pintrest', [PintrestController::class, 'index'])->name('pintrest');   
+    Route::get('/home/pintrest/deauth', [PintrestController::class, 'deauthorize'])->name('pintrestdeatuthorize');   
+    Route::get('/home/pintrest/login', [PintrestController::class, 'redirectToPintrest'])->name('pintrestlogin'); 
 
 
     // telegram Routes

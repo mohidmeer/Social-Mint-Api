@@ -74,6 +74,13 @@ return [
         'WebRedirectUri'=>env('Discord_Web_Uri'),
         'ClientRedirectUri'=>env('Discord_Client_Uri'),
         'RedirectUrlClient'=>env('Discord_Redirect_Client'),
+    ],
+
+    'pintrest'=>[
+
+        'clientId'=>env('Pintrest_Client_Id'),
+        'clientSecret'=>env('Pintrest_Client_Secret'),
+        'RedirectUrl'=>env('Pintrest_Redirect_Uri')
     ]
 
 

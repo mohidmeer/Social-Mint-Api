@@ -6,6 +6,7 @@ use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
+use App\Models\Pintrest\Pintrest;
 use App\Models\Reditt\Reditt;
 use App\Models\Telegram\Telegram;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -89,6 +90,11 @@ class User extends Authenticatable
     public function DChannels()
     {
         return $this->hasMany(Channels::class);
+    }
+
+    public function Pintrest()
+    {
+        return $this->hasOne(Pintrest::class);
     }
 
    
