@@ -87,8 +87,6 @@ Route::middleware(['auth'])->group(function () {
     //  twitter Routes
     Route::get('/home/twitter', [TwitterController::class, 'index'])->name('twitter');
     Route::get('home/twitter/deauth', [twitterController::class, 'deauthorize'])->name('twitterdeatuthorize');
-    // Route::get('home/twitter/deactivate/{id}', [twitterController::class, 'deactivate'])->name('twitterdeactivate');
-    // Route::get('home/twitter/activate/{id}', [twitterController::class, 'activate'])->name('twitteractivate');
     Route::get('home/twitter/login', [twitterController::class, 'redirectTotwitter'])->name('twitterlogin');
     
 
@@ -103,6 +101,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/pintrest', [PintrestController::class, 'index'])->name('pintrest');   
     Route::get('/home/pintrest/deauth', [PintrestController::class, 'deauthorize'])->name('pintrestdeatuthorize');   
     Route::get('/home/pintrest/login', [PintrestController::class, 'redirectToPintrest'])->name('pintrestlogin'); 
+    Route::get('home/pintrest/deactivate/{id}', [PintrestController::class, 'deactivate'])->name('pintrestdeactivate');
+    Route::get('home/pintrest/activate/{id}', [PintrestController::class, 'activate'])->name('pintrestactivate');
+    Route::get('home/pintrest/unlink/{id}', [PintrestController::class, 'unlink'])->name('unlinkBoard');
 
 
     // telegram Routes
@@ -115,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/discord', [DiscordController::class, 'index'])->name('discord'); 
     Route::get('/home/discord/login', [DiscordController::class, 'RedirectToDiscord'])->name('discordlogin');
     Route::get('/home/discord/deauth', [DiscordController::class, 'deauthorize'])->name('discorddeauthorize'); 
-    Route::get('home/discord/deactivate/{id}', [DiscordController::class, 'deactivate'])->name('discordeactivate');
+    Route::get('home/discord/deactivate/{id}', [DiscordController::class, 'deactivate'])->name('discorddeactivate');
     Route::get('home/discord/activate/{id}', [DiscordController::class, 'activate'])->name('discordactivate');
     Route::get('home/discord/unlink/{id}', [DiscordController::class, 'unlink'])->name('unlinkchannel');
    

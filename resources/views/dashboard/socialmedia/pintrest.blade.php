@@ -2,10 +2,7 @@
 @section('content')
 @include('dashboard.socialmedia.error')
 <div class="container">
-    @isset(Auth::user()->Pintrest['name'])
-    <div style="height:300px ;">
-    </div>
-    @endisset
+   
     <div class="row">
         <div class="col-lg-6 offset-lg-2 col-md-8 col-sm-12 offset-md-1 offset-sm-0 ">
             <div class="card">
@@ -51,7 +48,65 @@
         </div>
     </div>
 </div>
-<div style="height:400px ;">
 
+<div class="contain">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">User Boards</strong>
+                </div>
+                @isset(Auth::user()->Pintrest)
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (Auth::user()->BPintrest as $Board)
+                                <th scope="row">{{$loop->iteration}}</th>
+                                <td>{{$Board['name']}}</td>
+                                <td>
+                                    @if ($Board['status']==1)
+                                    <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('pintrestdeactivate',  $Board->id) }}" class="btn-sm rounded-pill btn-primary text-white">
+                                        Allowed</a>&nbsp;&nbsp;
+                                    @else
+                                    <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('pintrestactivate', $Board->id)  }}" class="btn-sm btn-danger text-white">
+                                        Allow</a>&nbsp;&nbsp;
+                                    @endif
+                                    <a data-toggle="tooltip" data-placement="right" title="delete" href="{{route('unlinkBoard',  $Board->id) }}" class="btn-sm btn-secondary text-white">Delete</a>
+
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>  
+                @endisset
+                @empty(Auth::user()->Pintrest)
+                <div class="card-body">
+                    <h2>
+                        No Boards
+                    </h2>
+                </div>
+                @endempty
+
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container overflow-hidden">
+    <div class="row">
+    </div>
+</div>
+</div>
+
+
+
+
 @endsection

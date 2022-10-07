@@ -85,4 +85,23 @@ class PintrestController extends Controller
         
     }
 
+
+    public function deactivate($id)
+    {
+
+        Board::where('id',$id)->update(['status'=>0]);
+        return redirect()->route('pintrest')->with('success', 'Deactivated');
+
+    }
+    public function activate($id)
+    {
+        Board::where('id',$id)->update(['status'=>1]);
+        return redirect()->route('pintrest')->with('success', 'Activated');
+    }
+    public function unlink($id)
+    {
+        Board::where('id',$id)->delete();
+        return redirect()->route('pintrest')->with('success', 'Deleted');
+    }
+
 }

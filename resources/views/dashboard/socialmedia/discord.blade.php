@@ -68,7 +68,7 @@
                                 <td>{{$Channel['name']}}</td>
                                 <td>
                                     @if ($Channel['status']==1)
-                                    <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('discordeactivate',  $Channel->channel_id) }}" class="btn-sm rounded-pill btn-primary text-white">
+                                    <a data-toggle="tooltip" data-placement="right" title="Disable" href="{{route('discorddeactivate',  $Channel->channel_id) }}" class="btn-sm rounded-pill btn-primary text-white">
                                         Allowed</a>&nbsp;&nbsp;
                                     @else
                                     <a data-toggle="tooltip" data-placement="right" title="Activate" href="{{ route('discordactivate', $Channel->channel_id)  }}" class="btn-sm btn-danger text-white">

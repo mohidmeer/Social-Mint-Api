@@ -194,10 +194,12 @@ class SocialmintController extends Controller
 
     public function AccountsData()
     { 
-        $facebook = array("Status"  =>  false,   "Multiple_Accounts" => false, "Name" => " No Account Linked",);
-        $instagram = array("Status"  => false,  "Multiple_Accounts" => false,  "Name" => " No Account Linked",);
-        $twitter =  array("Status"  =>  false,   "Multiple_Accounts" => false, "Name" => " No Account Linked",);
-        $reddit =  array("Status"  =>  false,   "Multiple_Accounts" => false,  "Name" => " No Account Linked",);
+        $facebook  = array("Status"   =>  false,   "Multiple_Pages" => false, "Name" => " No Account Linked",);
+        $instagram  = array("Status"   => false,  "Multiple_Pages" => false,  "Name" => " No Account Linked",);
+        $twitter   =  array("Status"  =>  false,   "Name" => " No Account Linked",);
+        $reddit    =  array("Status"  =>  false,   "Name" => " No Account Linked",);
+        $discord   =  array("Status"  =>  false,   "Multiple_Channels" => false,  "Name" => " No Account Linked",);
+        $pintrest  =  array("Status"  =>  false,   "Multiple_Boards" => false,    "Name" => " No Account Linked",);
 
 
         // Get The Auth User Data Pages And Accounts
@@ -205,8 +207,32 @@ class SocialmintController extends Controller
         $InstaAccounts  = Auth::user()->instaAccounts;
         $TwitterAccounts = Auth::user()->Socialtoken;
         $RedditAccount=Auth::user()->Reddit;
+        $DiscordAccount=Auth::user()->Discord;
+        $Channels=Auth::user()->DChannel;
 
-        // we will check that accounts are more than two for facebook and instagram 
+
+        // if (isset($DiscordAccount) )
+        // {
+        //     $discord['Status']=true;
+        //     if (count($Channels)>1){
+        //         $discord['Multiple_Channels']=true;
+        //         $discord["Name"] = "Multiple Channels";
+        //         $result=array();$i=0;
+        //     foreach($Channels as $channel)
+        //     {
+        //         $result[$i]=array("Name"=>$channel->name,"Id"=>$channel->id);
+        //         $i++;
+        //     }
+        //     $discord["Multiple_Channel_Data"]=$result;
+        //     }
+        // } elseif (count($Channels) == 1) {
+        //     $facebook["Name"] = $Facebook_Pages[0]->name;
+        //     $facebook["ImgUrl"]=$DiscordAccount->avatar;
+        // }
+
+
+
+
 
         if (count($Facebook_Pages) > 1) {
             $facebook["Status"] = true;
@@ -250,7 +276,7 @@ class SocialmintController extends Controller
 
         if (isset($RedditAccount->name)){
             $reddit["Status"]=true;
-            $reddit["Status"]=$RedditAccount->name;
+            $reddit["Name"]=$RedditAccount->name;
             $reddit["ImgUrl"]=$RedditAccount->avatar_url;
         }
 
@@ -258,10 +284,13 @@ class SocialmintController extends Controller
         
 
         $Accounts = array(
-            "facebook" => $facebook,
-            "instagram" => $instagram,
-            "twitter" => $twitter,
-            "reddit"=>$reddit);
+            "FACEBOOK" => $facebook,
+            "INSTAGRAM" => $instagram,
+            "TWITTER" => $twitter,
+            "REDDIT"=>$reddit,
+            "DISCORD"=>$discord,
+            "PINTREST"=>$pintrest
+           );
         return response($Accounts, 200);
     }
 
@@ -269,46 +298,7 @@ class SocialmintController extends Controller
 
 
 
-    public function UnlinkTwitter()
-    {
-        SocialMediaAccessTokens::where('user_id', Auth::user()->id)
-            ->update([
-                'tw_access_token' => null,
-                'tw_secret_token' => null,
-                'tw_name' => null,
-
-            ]);
-        return response('Twitter Unlinked Successfully',200);
-    }
-
-
-
-    public function UnlinkFacebook()
-    {
-
-         // Setting Facebook Access Tokens To Null 
-         SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>null]);
-
-         // Deleting All Pages for user 
-         Pages::where('user_id',Auth::user()->id)->delete();
- 
-         return response('Facebook Unlinked Successfully',200);
-
-    }
-
-
-    public function UnlinkInstagram()
-    {
-
-        // Setting Insta Access Tokens To Null 
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>null]);
-
-        InstagramAccounts::where('user_id',Auth::user()->id)->delete();
-
-        return response('Instagram Unlinked Successfully',200);
-
-    }
-
+  
 
 
     public function signup(Request $request)
@@ -362,7 +352,43 @@ class SocialmintController extends Controller
 
     }
 
+    public function UnlinkFacebook()
+    {
 
+         // Setting Facebook Access Tokens To Null 
+         SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>null]);
+
+         // Deleting All Pages for user 
+         Pages::where('user_id',Auth::user()->id)->delete();
+ 
+         return response('Facebook Unlinked Successfully',200);
+
+    }
+
+
+    public function UnlinkInstagram()
+    {
+
+        // Setting Insta Access Tokens To Null 
+        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>null]);
+
+        InstagramAccounts::where('user_id',Auth::user()->id)->delete();
+
+        return response('Instagram Unlinked Successfully',200);
+
+    }
+
+    public function UnlinkTwitter()
+    {
+        SocialMediaAccessTokens::where('user_id', Auth::user()->id)
+            ->update([
+                'tw_access_token' => null,
+                'tw_secret_token' => null,
+                'tw_name' => null,
+
+            ]);
+        return response('Twitter Unlinked Successfully',200);
+    }
 
 
 }

@@ -6,6 +6,7 @@ use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
+use App\Models\Pintrest\Board;
 use App\Models\Pintrest\Pintrest;
 use App\Models\Reditt\Reditt;
 use App\Models\Telegram\Telegram;
@@ -95,6 +96,11 @@ class User extends Authenticatable
     public function Pintrest()
     {
         return $this->hasOne(Pintrest::class);
+    }
+
+    public function BPintrest()
+    {
+        return $this->hasMany(Board::class);
     }
 
    
