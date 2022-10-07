@@ -81,6 +81,16 @@ return [
         'clientId'=>env('Pintrest_Client_Id'),
         'clientSecret'=>env('Pintrest_Client_Secret'),
         'RedirectUrl'=>env('Pintrest_Redirect_Uri')
+    ],
+
+    'authorizeurls'=>
+    [
+        'facebook'=>env('FACEBOOK_LOGIN_URL'),
+        'instagram'=>env('INSTAGRAM_LOGIN_URL'),
+        'twitter'=>env('TWITTER_LOGIN_URL'),
+        'reddit'=>env('REDDIT_LOGIN_URL'),
+        'discord'=>env('DISCORD_LOGIN_URL'),
+        'pintrest'=>env('PINTREST_LOGIN_URL'),
     ]
 
 

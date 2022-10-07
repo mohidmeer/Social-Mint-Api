@@ -15,11 +15,13 @@ Route::get('/facebook/callback', [SocialmintController::class,'facebookcallback'
 Route::get('/instagram/callback',[SocialmintController::class,'instacallback']);
 
 
+Route::get('/twitterredirect',[SocialmintController::class,'twitterurlredirectgenarator'])->middleware(['auth:sanctum']);
+Route::get('/facebook/login',[SocialmintController::class,'getFacebookRedirectUrl'])->middleware(['auth:sanctum']);
 
 
 
 Route::post('/signup',[SocialmintController::class,'signup']);
-Route::get('/twitterredirect',[SocialmintController::class,'twitterurlredirectgenarator'])->middleware(['auth:sanctum']);
+
 Route::get('/accounts',[SocialmintController::class,'AccountsData'])->middleware(['auth:sanctum']);
 
 

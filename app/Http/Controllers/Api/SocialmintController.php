@@ -19,6 +19,42 @@ use League\OAuth1\Client\Server\Twitter;
 class SocialmintController extends Controller
 {
 
+    public function getFacebookRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.facebook');
+        return response($URL,200) ;
+    }
+    public function getInstagramRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.instagram');
+        return response($URL,200) ;
+        
+    }
+    public function getTwitterRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.twitter');
+        return response($URL,200) ;
+    }
+    public function getRedditRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.reddit');
+        return response($URL,200) ;
+    }
+    public function getDiscordRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.discord');
+        return response($URL,200) ;
+    }
+    public function getPintrestRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.pintrest');
+        return response($URL,200) ;
+    }
+
+
+
+
+
 
 
     // facebook callback
@@ -194,44 +230,74 @@ class SocialmintController extends Controller
 
     public function AccountsData()
     { 
-        $facebook  = array("Status"   =>  false,   "Multiple_Pages" => false, "Name" => " No Account Linked",);
-        $instagram  = array("Status"   => false,  "Multiple_Pages" => false,  "Name" => " No Account Linked",);
-        $twitter   =  array("Status"  =>  false,   "Name" => " No Account Linked",);
-        $reddit    =  array("Status"  =>  false,   "Name" => " No Account Linked",);
+        $facebook  =  array("Status"   =>  false,   "Multiple_Pages" => false, "Name" => " No Account Linked",);
+        $instagram =  array("Status"   => false,  "Multiple_Pages" => false,  "Name" => " No Account Linked",);
+        $twitter   =  array("Status"  =>  false,   "Name" => " No Account Linked");
+        $reddit    =  array("Status"  =>  false,   "Name" => " No Account Linked");
+        $telegram  =  array("Status"  =>  false,   "Name" => " No Account Linked");
         $discord   =  array("Status"  =>  false,   "Multiple_Channels" => false,  "Name" => " No Account Linked",);
         $pintrest  =  array("Status"  =>  false,   "Multiple_Boards" => false,    "Name" => " No Account Linked",);
 
 
-        // Get The Auth User Data Pages And Accounts
-        $Facebook_Pages = Auth::user()->fbpages;
-        $InstaAccounts  = Auth::user()->instaAccounts;
-        $TwitterAccounts = Auth::user()->Socialtoken;
-        $RedditAccount=Auth::user()->Reddit;
-        $DiscordAccount=Auth::user()->Discord;
-        $Channels=Auth::user()->DChannel;
-
-
-        // if (isset($DiscordAccount) )
-        // {
-        //     $discord['Status']=true;
-        //     if (count($Channels)>1){
-        //         $discord['Multiple_Channels']=true;
-        //         $discord["Name"] = "Multiple Channels";
-        //         $result=array();$i=0;
-        //     foreach($Channels as $channel)
-        //     {
-        //         $result[$i]=array("Name"=>$channel->name,"Id"=>$channel->id);
-        //         $i++;
-        //     }
-        //     $discord["Multiple_Channel_Data"]=$result;
-        //     }
-        // } elseif (count($Channels) == 1) {
-        //     $facebook["Name"] = $Facebook_Pages[0]->name;
-        //     $facebook["ImgUrl"]=$DiscordAccount->avatar;
-        // }
+    
+        $Facebook_Pages  =   Auth::user()->fbpages;
+        $InstaAccounts   =   Auth::user()->instaAccounts;
+        $TwitterAccounts =   Auth::user()->Socialtoken;
+        $RedditAccount   =   Auth::user()->Reditt;
+        $DiscordAccount  =   Auth::user()->Discord;
+        $PintrestAccount =   Auth::user()->Pintrest;
+        
+        $Channels=Auth::user()->DChannels;
+        $PintrestBoards=Auth::user()->BPintrest;
 
 
 
+
+        if (isset($PintrestAccount))
+        {
+            $pintrest["Name"]=$PintrestAccount->name;
+            $pintrest["Status"]=true;
+            if (count ($PintrestBoards)>1){
+                $pintrest["Multiple_Boards"]=true;
+                $result=array();$i=0;
+                foreach($PintrestBoards as $Board)
+                {
+                    $result[$i]=array("Name"=>$Board->name,"Id"=>$Board->id);
+                    $i++;
+                }
+                $pintrest["Multiple_Boards_Data"]=$result;
+            }elseif(count($PintrestBoards)==1){
+                $pintrest["Board Name"] = $PintrestBoards[0]->name;
+                
+            }elseif(count($PintrestBoards)==0){
+                $pintrest["Board Name"]= null;
+            }
+        }
+
+
+
+
+        if (isset($DiscordAccount) )
+        {
+            $discord['Status']=true;
+            $discord["Name"] = $DiscordAccount->name;
+          
+            if (count($Channels)>1){
+                $discord['Multiple_Channels']=true;
+                $result=array();$i=0;
+            foreach($Channels as $channel)
+            {
+                $result[$i]=array("Name"=>$channel->name,"Id"=>$channel->id);
+                $i++;
+            }
+            $discord["Multiple_Channel_Data"]=$result;
+            }elseif (count($Channels) == 1) {
+                $discord["Channel Name"] = $Channels[0]->name;
+            } elseif(count($Channels) == 0){
+                $discord["Channel Name"] = null;
+            }
+            
+        }
 
 
         if (count($Facebook_Pages) > 1) {
@@ -248,7 +314,7 @@ class SocialmintController extends Controller
         } elseif (count($Facebook_Pages) == 1) {
             $facebook["Status"] = true;
             $facebook["Name"] = $Facebook_Pages[0]->name;
-            $facebook["ImgUrl"]=$Facebook_Pages[0]->img_url;
+           
         }
 
         if (count($InstaAccounts) > 1) {
@@ -265,19 +331,19 @@ class SocialmintController extends Controller
         } elseif (count($InstaAccounts) == 1) {
             $instagram["Status"] = true;
             $instagram["Name"] = $InstaAccounts[0]->name;
-            $instagram["ImgUrl"]=$InstaAccounts[0]->profile_picture_url;
+           
         }
 
         if (isset($TwitterAccounts->tw_name)) {
             $twitter["Status"] = true;
             $twitter["Name"]   =$TwitterAccounts->tw_name;
-            $twitter["ImgUrl"] =$TwitterAccounts->tw_img_url;
+          
         }
 
-        if (isset($RedditAccount->name)){
+        if (isset($RedditAccount)){
             $reddit["Status"]=true;
             $reddit["Name"]=$RedditAccount->name;
-            $reddit["ImgUrl"]=$RedditAccount->avatar_url;
+   
         }
 
         
@@ -294,11 +360,6 @@ class SocialmintController extends Controller
         return response($Accounts, 200);
     }
 
-
-
-
-
-  
 
 
     public function signup(Request $request)

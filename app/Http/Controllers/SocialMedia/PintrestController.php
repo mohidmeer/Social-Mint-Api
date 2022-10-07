@@ -43,14 +43,16 @@ class PintrestController extends Controller
             'refresh_token' => $AccessTokens['refresh_token']
 
         ]);
-
+        $i=1;
         foreach($UserBoards['items'] as $Board )
         {
             Board::create([
                 'user_id'=>$userid,
                 'name'=>$Board['name'],
-                'board_id'=>$Board['id']
+                'board_id'=>$Board['id'],
+                'status'=>$i
             ]);
+            $i=0;
         }
 
 
