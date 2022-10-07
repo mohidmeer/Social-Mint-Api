@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\SocialMintFrontend;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Controllers\Controller;
@@ -21,152 +21,17 @@ class SocialmintController extends Controller
 
     public function getFacebookRedirectUrl()
     {
-        $URL=config('services.authorizeurls.facebook');
+
+        $URL=config('services.authorizeurls.facebook').Crypt::encryptString(Auth::user()->id);
         return response($URL,200) ;
     }
     public function getInstagramRedirectUrl()
     {
-        $URL=config('services.authorizeurls.instagram');
+        $URL=config('services.authorizeurls.instagram').Crypt::encryptString(Auth::user()->id);
         return response($URL,200) ;
         
     }
     public function getTwitterRedirectUrl()
-    {
-        $URL=config('services.authorizeurls.twitter');
-        return response($URL,200) ;
-    }
-    public function getRedditRedirectUrl()
-    {
-        $URL=config('services.authorizeurls.reddit');
-        return response($URL,200) ;
-    }
-    public function getDiscordRedirectUrl()
-    {
-        $URL=config('services.authorizeurls.discord');
-        return response($URL,200) ;
-    }
-    public function getPintrestRedirectUrl()
-    {
-        $URL=config('services.authorizeurls.pintrest');
-        return response($URL,200) ;
-    }
-
-
-
-
-
-
-
-    // facebook callback
-    public function facebookcallback(Request $request)
-    {
-
-        $userid = User::where('email', $request->state)->get('id')[0]->id;
-
-        // Making URL For Exchanging Code For Facebook Access Token
-        $AccessTokenUrl = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" . env('facebook_client_id') . "&client_secret=" . env('facebook_client_secret') . "&redirect_uri=http://localhost:8000/api/socialmintshare/facebook/callback&code=" . $request->code . "";
-
-
-        // Getting Access Token From Facebook
-        $AccessToken = Http::get($AccessTokenUrl);
-
-
-
-
-        // IF NOT ACCESS TOKEN NOT FOUND THEN RETURN USER WITH MESSAGE
-        if (isset($AccessToken['error'])) {
-            return response('No Access Token Granted', 404);
-        }
-
-
-
-        // Checking That does current user exists in  Table Columns if not we will create new entry
-        $SocialMediaAccessToken = SocialMediaAccessTokens::where('user_id', $userid)->first();
-
-
-        // Saving User Facebook Access Token In Database or updating its record
-        if (isset($SocialMediaAccessToken)) {
-            SocialMediaAccessTokens::where('user_id', $userid)->update(['fb_access_token' => $AccessToken['access_token']]);
-        } else {
-            SocialMediaAccessTokens::create(['user_id' =>  $userid, 'fb_access_token' => $AccessToken['access_token']])->save();
-        }
-
-
-        // Getting Pages Name And Page Respective  Access Token
-        $pages = Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=name,access_token');
-
-
-        //  Saving The Pages To Database
-        $NoOfPages = $pages['data'];
-        foreach ($NoOfPages as $page) {
-            $getimgurl = Http::withToken($page['access_token'])
-                ->get("https://graph.facebook.com/" . $page['id'] . "/picture?redirect=0");
-            $DbPageTokken = Pages::create([
-                'user_id' =>  $userid,
-                'name' => $page['name'],
-                'page_id' => $page['id'],
-                'page_access_token' => $page['access_token'],
-                'img_url' => $getimgurl['data']['url']
-            ]);
-            $DbPageTokken->save();
-        }
-
-        return redirect(config('services.socialmint.redirect'), 201);
-    }
-
-
-
-    // insta callback
-    public function instacallback(Request $request)
-    {
-        $userid = User::where('email', $request->state)->get('id')[0]->id;
-        // Making URL For Exchanging Code For Facebook Access Token
-        $AccessTokenUrl = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" . env('facebook_client_id') . "&client_secret=" . env('facebook_client_secret') . "&redirect_uri=http://localhost:8000/api/socialmintshare/instagram/callback&code=" . $request->code . "";
-
-        // Getting Access Token From Facebook
-        $AccessToken = Http::get($AccessTokenUrl);
-
-        // IF NOT ACCESS TOKEN NOT FOUND THEN RETURN USER WITH MESSAGE
-        if (isset($AccessToken['error'])) {
-            return response("Not Authorized Try Again Latter", 404);
-        }
-
-        // Updating the Access Token for Instagram
-        SocialMediaAccessTokens::where('user_id', $userid)->update(['insta_access_token' => $AccessToken['access_token']]);
-
-        // Getting Instagram FacebookLinked Business Account
-        $InstaAccounts = Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=instagram_business_account,access_token');
-        $NoOfAccounts = $InstaAccounts['data'];
-
-        //  Saving All Accounts to database
-        foreach ($NoOfAccounts as $account) {
-
-            // Making Sure That User Have Insta Bussinees Field in Json Data If Not We Will Not Save The Account For Use
-            if (empty($account['instagram_business_account'])) {
-                continue;
-            }
-
-            // Getting THe Account Name And Profile Pic URL
-            $Accountname = Http::withToken($AccessToken['access_token'])
-                ->get('https://graph.facebook.com/' . $account['instagram_business_account']['id'] . '/?fields=username,profile_picture_url');
-
-            InstagramAccounts::create([
-                'user_id' =>  $userid,
-                'name' => $Accountname['username'],
-                'profile_picture_url' => $Accountname['profile_picture_url'],
-                'insta_business_id' => $account['instagram_business_account']['id'],
-                'page_access_token' => $account['access_token'],
-                'page_id' => $account['id']
-            ])->save();
-        }
-
-
-        return redirect(config('services.socialmint.redirect'), 201);
-    }
-
-
-    // Twitter Url Genaration 
-    public function twitterurlredirectgenarator()
     {
         $state = Crypt::encryptString(Auth::user()->id);
         $connection = new TwitterOAuth(
@@ -179,51 +44,23 @@ class SocialmintController extends Controller
 
         return response('https://api.twitter.com/oauth/authorize?oauth_token=' . $oauth_token, 200);
     }
-
-
-
-    // twitter callback
-    public function twittercallback(Request $request)
+    public function getRedditRedirectUrl()
     {
-        // finding user by id
-        $userid = Crypt::decryptString($request->state);
-
-        $AccessTokens = Http::post("https://api.twitter.com/oauth/access_token?oauth_token=" . $request->oauth_token . "&oauth_verifier=" . $request->oauth_verifier . "");
-
-        // Condition for checing if we get the access token or not 
-        // if (!(isset($AccessTokens->oauth_token))){ return response($AccessTokens,404) ;}
-
-
-        $url = 'https://www.g.com/r?' . $AccessTokens;
-        $url_components = parse_url($url);
-        parse_str($url_components['query'], $params);
-
-
-        $con = new TwitterOAuth(
-            config('services.twitter.consumer_key'),
-            config('services.twitter.consumer_secret'),
-            $params['oauth_token'],
-            $params['oauth_token_secret'],
-        );
-
-       
-
-        $imgurl = $con->get("users/show",['screen_name'=>$params['screen_name']]);
-
-          
-        $imgurl->profile_image_url_https;
-
-
-        SocialMediaAccessTokens::where('user_id', $userid)
-            ->update([
-                'tw_access_token' => $params['oauth_token'],
-                'tw_secret_token' => $params['oauth_token_secret'],
-                'tw_name' => $params['screen_name'],
-                'tw_img_url'=>$imgurl->profile_image_url_https
-
-            ]);
-        return redirect(config('services.socialmint.redirect'), 201);
+        $URL=config('services.authorizeurls.reddit').Crypt::encryptString(Auth::user()->id);
+        return response($URL,200) ;
     }
+    public function getDiscordRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.discord').Crypt::encryptString(Auth::user()->id);
+        return response($URL,200) ;
+    }
+    public function getPintrestRedirectUrl()
+    {
+        $URL=config('services.authorizeurls.pintrest').Crypt::encryptString(Auth::user()->id);
+        return response($URL,200) ;
+    }
+
+
 
 
 
@@ -245,12 +82,9 @@ class SocialmintController extends Controller
         $TwitterAccounts =   Auth::user()->Socialtoken;
         $RedditAccount   =   Auth::user()->Reditt;
         $DiscordAccount  =   Auth::user()->Discord;
-        $PintrestAccount =   Auth::user()->Pintrest;
-        
+        $PintrestAccount =   Auth::user()->Pintrest;        
         $Channels=Auth::user()->DChannels;
         $PintrestBoards=Auth::user()->BPintrest;
-
-
 
 
         if (isset($PintrestAccount))
@@ -274,9 +108,6 @@ class SocialmintController extends Controller
             }
         }
 
-
-
-
         if (isset($DiscordAccount) )
         {
             $discord['Status']=true;
@@ -298,7 +129,6 @@ class SocialmintController extends Controller
             }
             
         }
-
 
         if (count($Facebook_Pages) > 1) {
             $facebook["Status"] = true;
@@ -389,6 +219,11 @@ class SocialmintController extends Controller
         return response(["Bearer_Token" => $token], 201);
     }
 
+
+
+
+    // selections for pages,channels,boards
+
     public function SelectInstagramPages(Request $request)
     {
         // We Will delete all pages except the selected Id Page 
@@ -412,7 +247,23 @@ class SocialmintController extends Controller
 
 
     }
+    public function SelectDiscordChannel(Request $request)
+    {
 
+    }
+    public function SelectPintrestBoards(Request $request)
+    {
+
+    }
+    public function SaveTelegram(Request $request)
+    {
+
+    } 
+
+
+
+
+    // Unlinking Accounts
     public function UnlinkFacebook()
     {
 
@@ -425,8 +276,6 @@ class SocialmintController extends Controller
          return response('Facebook Unlinked Successfully',200);
 
     }
-
-
     public function UnlinkInstagram()
     {
 
@@ -438,7 +287,6 @@ class SocialmintController extends Controller
         return response('Instagram Unlinked Successfully',200);
 
     }
-
     public function UnlinkTwitter()
     {
         SocialMediaAccessTokens::where('user_id', Auth::user()->id)
@@ -450,6 +298,31 @@ class SocialmintController extends Controller
             ]);
         return response('Twitter Unlinked Successfully',200);
     }
+    public function UnlinkReddit()
+    {
+        Auth::user()->Reddit->delete();
+        return response('Reddit Unlinked Successfully',200);
+    }
+    public function UnlinkTelegram()
+    {
+        
+        return response('Telegram Unlinked Successfully',200);
+    }
+    public function UnlinkPintrest()
+    {
+        Auth::user()->Pintrest->delete();
+        Auth::user()->BPintrest->delete();
+        return response('Pinterest Unlinked Successfully',200);
+    }
+    public function UnlinkDiscord()
+    {
+        Auth::user()->Discord->delete();
+        Auth::user()->DChannels->delete();
+        return response('Discord Unlinked Successfully',200);
+    }
+
+
+
 
 
 }
