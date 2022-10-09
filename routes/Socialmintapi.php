@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SocialMintFrontend\LoginUrlController;
 use App\Http\Controllers\Api\SocialMintFrontend\SocialmintController;
 use App\Http\Controllers\Api\SocialMintFrontend\SocialCallBacks;
 use App\Models\SocialMediaAccessTokens;
@@ -15,16 +16,16 @@ Route::get('/twitter/callback'  ,   [SocialCallBacks::class,'twittercallback' ])
 Route::get('/facebook/callback' ,   [SocialCallBacks::class,'facebookcallback']);
 Route::get('/instagram/callback',   [SocialCallBacks::class,'instacallback']);
 Route::get('/reddit/callback'   ,   [SocialCallBacks::class,'redditcallback']);
-Route::get('/discord/callback'   ,  [SocialCallBacks::class,'redditcallback']);
-Route::get('/pintrest/callback'   , [SocialCallBacks::class,'pintrestcallback']);
+Route::get('/discord/callback'  ,  [SocialCallBacks::class,'redditcallback']);
+Route::get('/pintrest/callback' , [SocialCallBacks::class,'pintrestcallback']);
 
 // Auth Url Genarations 
-Route::get('/facebook/login',[SocialmintController::class, 'getFacebookRedirectUrl'])->middleware(['auth:sanctum']);
-Route::get('/instagram/login',[SocialmintController::class,'getInstagramRedirectUrl'])->middleware(['auth:sanctum']);
-Route::get('/twitter/login',[SocialmintController::class,  'getTwitterRedirectUrl'])->middleware(['auth:sanctum']);
-Route::get('/reddit/login',[SocialmintController::class,   'getRedditRedirectUrl'])->middleware(['auth:sanctum']);
-Route::get('/discord/login',[SocialmintController::class,  'getDiscordRedirectUrl'])->middleware(['auth:sanctum']);
-Route::get('/pintrest/login',[SocialmintController::class, 'getPintrestRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/facebook/login'    ,[LoginUrlController::class, 'getFacebookRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/instagram/login'   ,[LoginUrlController::class,'getInstagramRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/twitter/login'     ,[LoginUrlController::class,  'getTwitterRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/reddit/login'      ,[LoginUrlController::class,   'getRedditRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/discord/login'     ,[LoginUrlController::class,  'getDiscordRedirectUrl'])->middleware(['auth:sanctum']);
+Route::get('/pintrest/login'    ,[LoginUrlController::class, 'getPintrestRedirectUrl'])->middleware(['auth:sanctum']);
 
 
 

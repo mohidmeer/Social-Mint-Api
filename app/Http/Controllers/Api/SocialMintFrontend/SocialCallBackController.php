@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
 use App\Models\Instagram\InstagramAccounts;
+use App\Models\Pintrest\Board;
+use App\Models\Pintrest\Pintrest;
 use App\Models\SocialMediaAccessTokens;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +19,6 @@ class SocialCallBacks extends Controller
 {
 
 
-    // facebook callback
     public function facebookcallback(Request $request)
     {
 
@@ -74,7 +75,7 @@ class SocialCallBacks extends Controller
         return redirect(config('services.socialmint.redirect'), 201);
     }
 
-    // instagram callback
+   
     public function instacallback(Request $request)
     {
         $userid = Crypt::decryptString($request->state);
@@ -122,7 +123,7 @@ class SocialCallBacks extends Controller
         return redirect(config('services.socialmint.redirect'), 201);
     }
 
-     // twitter callback
+
      public function twittercallback(Request $request)
      {
          // finding user by id
@@ -166,20 +167,19 @@ class SocialCallBacks extends Controller
      }
 
 
-    //  Reddit callback
+
      public function redditcallback(Request $request)
      {
         // THIS WILL BE HANDLED BY WEB REDDIT CONTROLLER WE HAVE A COMPLICATION AS REDDIT DOESNET ALLOW FOR MULTIPLE REDIRECT URIS
         // IF WE USE SEPARATE APP FOR AUTH HERE THEN WE WONT BE ABLE TO MAKE API REQUEST TO POST BECAUSE WE NEED TO MANAGE TWO
-        // SEPARATE API KEYS FOR EACH REQUEST WE NEED TO MAKE SURE WHICH APP KEYS TO USE FOR MAKING POST CALLS 
+        // SEPARATE API KEYS FOR EACH REQUEST WE NEED TO MAKE SURE WHICH APP KEYS TO USE FOR MAKING POST CALLS ON REDDIT
      }
 
-    //  Discord callback
+   
      public function discordcallback(Request $request)
      {
 
         $user_id=Crypt::decryptString($request->state);
-
 
         // Exchange Code For Access Tokens 
     
@@ -236,7 +236,45 @@ class SocialCallBacks extends Controller
     //  Pintrest callback
     public function pintrestcallback(Request $request)
      {
+        $userid = Crypt::decryptString($request->state);
 
+        $AccessTokenUrl = 'https://api.pinterest.com/v5/oauth/token';
+
+        $AccessTokens = Http::asForm()->withBasicAuth(config('services.pintrest.clientId'), config('services.pintrest.clientSecret'))
+            ->post($AccessTokenUrl, [
+                'grant_type' => 'authorization_code',
+                'code' => $request->code,
+                'redirect_uri' => config('services.pintrest.RedirectUrl'),
+            ]);
+
+        $UserAccount = Http::withToken($AccessTokens['access_token'])->get('https://api.pinterest.com/v5/user_account');
+        $UserBoards = Http::withToken($AccessTokens['access_token'])->get('https://api.pinterest.com/v5/boards');
+         
+
+        // return $UserBoards['items'][0]['name'];
+
+        Pintrest::create([
+
+            'user_id' => $userid,
+            'name' => $UserAccount['username'],
+            'avatar' => isset($UserAccount['profile_image']) ?  $UserAccount['profile_image'] : null,
+            'access_token' => $AccessTokens['access_token'],
+            'refresh_token' => $AccessTokens['refresh_token']
+
+        ]);
+        $i=1;
+        foreach($UserBoards['items'] as $Board )
+        {
+            Board::create([
+                'user_id'=>$userid,
+                'name'=>$Board['name'],
+                'board_id'=>$Board['id'],
+                'status'=>$i
+            ]);
+            $i=0;
+        }
+
+        return redirect(config('services.socialmint.redirect'), 201);
      }
  
 }
