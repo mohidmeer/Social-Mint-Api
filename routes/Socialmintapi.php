@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\SocialMintFrontend\DeauthorizationController;
 use App\Http\Controllers\Api\SocialMintFrontend\LoginUrlController;
+use App\Http\Controllers\Api\SocialMintFrontend\SelectionController;
 use App\Http\Controllers\Api\SocialMintFrontend\SocialCallBackController;
 use App\Http\Controllers\Api\SocialMintFrontend\SocialmintController;
 
@@ -29,23 +31,26 @@ Route::get('/discord/login'     ,[LoginUrlController::class,  'getDiscordRedirec
 Route::get('/pintrest/login'    ,[LoginUrlController::class, 'getPintrestRedirectUrl'])->middleware(['auth:sanctum']);
 
 
-
-
-
-
-
-
-
-
 Route::post('/signup',[SocialmintController::class,'signup']);
 Route::get('/accounts',[SocialmintController::class,'AccountsData'])->middleware(['auth:sanctum']);
 
 
-Route::delete('/unlinktwitter',[SocialmintController::class,'UnlinkTwitter'])->middleware(['auth:sanctum']);
-Route::delete('/unlinkfacebook',[SocialmintController::class,'UnlinkFacebook'])->middleware(['auth:sanctum']);
-Route::delete('/unlinkinstagram',[SocialmintController::class,'UnlinkInstagram'])->middleware(['auth:sanctum']);
 
 
 
-Route::post('/facebookselection',[SocialmintController::class,'SelectFacebookPages'])->middleware(['auth:sanctum']);
-Route::post('/instagramselection',[SocialmintController::class,'SelectInstagramPages'])->middleware(['auth:sanctum']);
+
+Route::delete('/twitter/unlink',  [DeauthorizationController::class,'UnlinkTwitter'])->middleware(['auth:sanctum']);
+Route::delete('/facebook/unlink', [DeauthorizationController::class,'UnlinkFacebook'])->middleware(['auth:sanctum']);
+Route::delete('/instagram/unlink',[DeauthorizationController::class,'UnlinkInstagram'])->middleware(['auth:sanctum']);
+Route::delete('/reddit/unlink',   [DeauthorizationController::class,'UnlinkReddit'])->middleware(['auth:sanctum']);
+Route::delete('/discord/unlink',  [DeauthorizationController::class,'UnlinkDiscord'])->middleware(['auth:sanctum']);
+Route::delete('/pinterest/unlink',[DeauthorizationController::class,'UnlinkPinterest'])->middleware(['auth:sanctum']);
+Route::delete('/telegram/unlink', [DeauthorizationController::class,'UnlinkTelegram'])->middleware(['auth:sanctum']);
+
+
+
+Route::post('/facebook/select' , [SelectionController::class,'SelectFacebookPages'])->middleware(['auth:sanctum']);
+Route::post('/instagram/select', [SelectionController::class,'SelectInstagramPages'])->middleware(['auth:sanctum']);
+Route::post('/discord/select',   [SelectionController::class,'SelectDiscordChannels'])->middleware(['auth:sanctum']);
+Route::post('/pinterest/select', [SelectionController::class,'SelectPintrestBoards'])->middleware(['auth:sanctum']);
+Route::post('/telegram/select',  [SelectionController::class,'SaveTelegramId'])->middleware(['auth:sanctum']);

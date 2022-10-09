@@ -16,6 +16,36 @@ class SocialmintController extends Controller
 
    
 
+
+    public function signup(Request $request)
+    {
+        $username = $request->user['result']['name'];
+        $email    = $request->user['result']['email'];
+        $password = "ANYTHINGRANDOM";
+
+        //  WE will return the user if already exsists
+        $finduser = User::where('email', $email)->first();
+        if ($finduser) {
+            return response(['message' => $email . " Already Exists"], 409);
+        }
+
+        // Creating New User Account 
+        $user = User::create([
+            'name' => $username,
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $user->api_access_token = $token;
+        $user->save();
+        SocialMediaAccessTokens::create([
+            'user_id' => $user['id'],
+        ])->save();
+        return response(["Bearer_Token" => $token], 201);
+    }
+
+
+
     public function AccountsData()
     { 
         $facebook  =  array("Status"   =>  false,   "Multiple_Pages" => false, "Name" => " No Account Linked",);
@@ -142,136 +172,7 @@ class SocialmintController extends Controller
     }
 
 
-
-    public function signup(Request $request)
-    {
-        $username = $request->user['result']['name'];
-        $email    = $request->user['result']['email'];
-        $password = "ANYTHINGRANDOM";
-
-        //  WE will return the user if already exsists
-        $finduser = User::where('email', $email)->first();
-        if ($finduser) {
-            return response(['message' => $email . " Already Exists"], 409);
-        }
-
-        // Creating New User Account 
-        $user = User::create([
-            'name' => $username,
-            'email' => $email,
-            'password' => Hash::make($password),
-        ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        $user->api_access_token = $token;
-        $user->save();
-        SocialMediaAccessTokens::create([
-            'user_id' => $user['id'],
-        ])->save();
-        return response(["Bearer_Token" => $token], 201);
-    }
-
-
-
-
-    // selections for pages,channels,boards
-
-    public function SelectInstagramPages(Request $request)
-    {
-        // We Will delete all pages except the selected Id Page 
-
-        // return $request->page_id;
-
-       InstagramAccounts::where('id','!=' ,$request->page_id )->delete();
-        return response('Successfully Connected',200 );
-        
-    }
-    public function SelectFacebookPages(Request $request)
-    {
-        // We Will delete all pages except the selected Id Page 
-
-        // return $request->all;
-
-        // Deleting Page for user 
-         Pages::where('id','!=',$request->page_id)->delete();
-
-        return response('Successfully Connected ',200 );
-
-
-    }
-    public function SelectDiscordChannel(Request $request)
-    {
-
-    }
-    public function SelectPintrestBoards(Request $request)
-    {
-
-    }
-    public function SaveTelegram(Request $request)
-    {
-
-    } 
-
-
-
-
-    // Unlinking Accounts
-    public function UnlinkFacebook()
-    {
-
-         // Setting Facebook Access Tokens To Null 
-         SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>null]);
-
-         // Deleting All Pages for user 
-         Pages::where('user_id',Auth::user()->id)->delete();
- 
-         return response('Facebook Unlinked Successfully',200);
-
-    }
-    public function UnlinkInstagram()
-    {
-
-        // Setting Insta Access Tokens To Null 
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>null]);
-
-        InstagramAccounts::where('user_id',Auth::user()->id)->delete();
-
-        return response('Instagram Unlinked Successfully',200);
-
-    }
-    public function UnlinkTwitter()
-    {
-        SocialMediaAccessTokens::where('user_id', Auth::user()->id)
-            ->update([
-                'tw_access_token' => null,
-                'tw_secret_token' => null,
-                'tw_name' => null,
-
-            ]);
-        return response('Twitter Unlinked Successfully',200);
-    }
-    public function UnlinkReddit()
-    {
-        Auth::user()->Reddit->delete();
-        return response('Reddit Unlinked Successfully',200);
-    }
-    public function UnlinkTelegram()
-    {
-        
-        return response('Telegram Unlinked Successfully',200);
-    }
-    public function UnlinkPintrest()
-    {
-        Auth::user()->Pintrest->delete();
-        Auth::user()->BPintrest->delete();
-        return response('Pinterest Unlinked Successfully',200);
-    }
-    public function UnlinkDiscord()
-    {
-        Auth::user()->Discord->delete();
-        Auth::user()->DChannels->delete();
-        return response('Discord Unlinked Successfully',200);
-    }
-
+   
 
 
 
