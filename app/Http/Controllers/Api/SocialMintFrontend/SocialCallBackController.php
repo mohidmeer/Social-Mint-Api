@@ -6,6 +6,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
+use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\Pintrest\Board;
 use App\Models\Pintrest\Pintrest;
