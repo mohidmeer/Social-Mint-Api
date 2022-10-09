@@ -71,7 +71,7 @@
          'Content-Type'=> 'application/json', 
          'Authorization'=> 'Bearer 3|9djRAt1BVsULvfSxRfQEIcskNCcQouLmc91qGruV', 
      ]) 
-     ->post('https://socialmintshare.net/api/facebook/pic/post'); 
+     ->post('https://socialmintshare.net/api/facebook/pic'); 
  
  echo $response->body();                            
                             </code>
@@ -83,7 +83,7 @@
 var axios = require("axios").default;
 var options = {
   method: 'POST',
-  url: 'https://socialmintshare.net/api/facebook/pic/post',
+  url: 'https://socialmintshare.net/api/facebook/pic',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ axios.request(options).then(function (response) {
 import requests
 import json
 
-reqUrl = "https://socialmintshare.net/api/facebook/pic/post"
+reqUrl = "https://socialmintshare.net/api/facebook/pic"
 
 headersList = {
  "Accept": "application/json",
