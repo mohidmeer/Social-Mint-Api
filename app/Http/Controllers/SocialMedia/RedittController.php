@@ -7,6 +7,7 @@ use App\Models\Reditt\Reditt;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
 class RedittController extends Controller
@@ -67,13 +68,13 @@ class RedittController extends Controller
     public function handlePlatformCallack(Request $request)
     {
 
-        $email = explode (",", $request->state); 
+        
         
         if (isset($request->error)){return response($request->error, 404);}
 
 
-        $userid = User::where('email', $email[1])->get('id')[0]->id;
-
+        $userid = User::find(Crypt::decryptString($request->state))->id;
+        
 
         $AccessToken=Http::withBasicAuth(config('services.reddit.client_id'),config('services.reddit.client_secret'))
         ->asForm()

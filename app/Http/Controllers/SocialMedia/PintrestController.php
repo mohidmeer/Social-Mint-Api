@@ -82,6 +82,7 @@ class PintrestController extends Controller
     {
 
         Pintrest::where('user_id',Auth::user()->id)->delete();
+        Board::where('user_id',Auth::user()->id)->delete();
         return redirect()->route('pintrest')->with('success', 'Successfully Removed');
 
         
