@@ -17,7 +17,7 @@ Route::get('/twitter/callback'  ,   [SocialCallBackController::class,'twittercal
 Route::get('/facebook/callback' ,   [SocialCallBackController::class,'facebookcallback']);
 Route::get('/instagram/callback',   [SocialCallBackController::class,'instacallback']);
 Route::get('/reddit/callback'   ,   [SocialCallBackController::class,'redditcallback']);
-Route::get('/discord/callback'  ,   [SocialCallBackController::class,'redditcallback']);
+Route::get('/discord/callback'  ,   [SocialCallBackController::class,'discordcallback']);
 Route::get('/pintrest/callback' ,   [SocialCallBackController::class,'pintrestcallback']);
 
 // Auth Url Genarations 
