@@ -22,7 +22,7 @@ class CreateInstagramAccountsTable extends Migration
             $table->unsignedBigInteger('insta_business_id');
             $table->text('page_id');
             $table->text('page_access_token');
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

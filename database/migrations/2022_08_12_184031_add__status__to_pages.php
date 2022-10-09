@@ -15,7 +15,7 @@ class AddStatusToPages extends Migration
     {
         Schema::table('pages', function (Blueprint $table) {
 
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(0);
             
         });
     }

@@ -64,6 +64,7 @@ class FacebookController extends Controller
 
         //  Saving The Pages To Database
         $NoOfPages= $pages['data'];
+        $i=1;
         foreach($NoOfPages as $page){
             $getimgurl=Http::withToken($page['access_token'])
             ->get("https://graph.facebook.com/".$page['id']."/picture?redirect=0");
@@ -72,8 +73,12 @@ class FacebookController extends Controller
             'name' => $page['name'],
             'page_id'=>$page['id'],
             'page_access_token'=>$page['access_token'],
-            'img_url' =>$getimgurl['data']['url']]);
+            'status'=>$i,
+            'img_url' => isset($getimgurl['data']['url']) ? $getimgurl['data']['url'] : null           
+                   
+        ]);
             $DbPageTokken->save();
+            $i=0;
         }
       
 

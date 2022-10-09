@@ -52,6 +52,7 @@ class InstagramController extends Controller
          $NoOfAccounts= $InstaAccounts['data'];
         
          //  Saving All Accounts to database
+         $i=1;
         foreach($NoOfAccounts as $account ){
 
              // Making Sure That User Have Insta Bussinees Field in Json Data If Not We Will Not Save The Account For Use
@@ -67,7 +68,9 @@ class InstagramController extends Controller
                     'profile_picture_url'=> isset($Accountname['profile_picture_url']) ? $Accountname['profile_picture_url'] : null   ,
                     'insta_business_id'=> $account['instagram_business_account']['id'],
                     'page_access_token'=>$account['access_token'],
+                    'status'=>$i,
                     'page_id' => $account['id']])->save();
+                    $i=0;
             }
        
             return redirect()->route('instagram');

@@ -60,6 +60,7 @@ class SocialCallBackController extends Controller
 
         //  Saving The Pages To Database
         $NoOfPages = $pages['data'];
+        $i=1;
         foreach ($NoOfPages as $page) {
             $getimgurl = Http::withToken($page['access_token'])
                 ->get("https://graph.facebook.com/" . $page['id'] . "/picture?redirect=0");
@@ -68,9 +69,11 @@ class SocialCallBackController extends Controller
                 'name' => $page['name'],
                 'page_id' => $page['id'],
                 'page_access_token' => $page['access_token'],
-                'img_url' => $getimgurl['data']['url']
+                'img_url' => $getimgurl['data']['url'],
+                'status'=>$i
             ]);
             $DbPageTokken->save();
+            $i=0;
         }
 
         return redirect(config('services.socialmint.redirect'), 201);
@@ -99,6 +102,7 @@ class SocialCallBackController extends Controller
         $NoOfAccounts = $InstaAccounts['data'];
 
         //  Saving All Accounts to database
+        $i=1;
         foreach ($NoOfAccounts as $account) {
 
             // Making Sure That User Have Insta Bussinees Field in Json Data If Not We Will Not Save The Account For Use
@@ -113,11 +117,13 @@ class SocialCallBackController extends Controller
             InstagramAccounts::create([
                 'user_id' =>  $userid,
                 'name' => $Accountname['username'],
-                'profile_picture_url' => $Accountname['profile_picture_url'],
+                'profile_picture_url' => isset($Accountname['profile_picture_url']) ? $Accountname['profile_picture_url'] : null,
                 'insta_business_id' => $account['instagram_business_account']['id'],
                 'page_access_token' => $account['access_token'],
-                'page_id' => $account['id']
+                'page_id' => $account['id'],
+                'status'=>$i
             ])->save();
+            $i=0;
         }
 
 

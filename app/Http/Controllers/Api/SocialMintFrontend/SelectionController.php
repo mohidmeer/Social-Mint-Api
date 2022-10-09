@@ -16,20 +16,22 @@ class SelectionController extends Controller
     public function SelectInstagramPages(Request $request)
     {
        $request->validate(['id'=>'required']);
-       InstagramAccounts::where('id','!=' ,$request->page_id )->delete();
+       InstagramAccounts::where('id',$request->id )->update(['status'=>1]);
+       InstagramAccounts::where('id','!=' ,$request->id )->delete();
        return response('Successfully Connected',200 );
-        
     }
     public function SelectFacebookPages(Request $request)
     {
         $request->validate(['id'=>'required']);
-        Pages::where('id','!=',$request->page_id)->delete();
+        Pages::where('id',$request->id )->update(['status'=>1]);
+        Pages::where('id','!=',$request->id)->delete();
         return response('Successfully Connected ',200 );
 
     }
     public function SelectDiscordChannel(Request $request)
     {
         $request->validate(['id'=>'required']);
+        Channels::where('id',$request->id )->update(['status'=>1]);
         Channels::where('id','!=',$request->id)->delete();
         return response('Successfully Connected ',200 );
 
@@ -38,6 +40,7 @@ class SelectionController extends Controller
     public function SelectPintrestBoards(Request $request)
     {
         $request->validate(['id'=>'required']);
+        Board::where('id',$request->id )->update(['status'=>1]);
         Board::where('id','!=',$request->id)->delete();
         return response('Successfully Connected ',200 );
     }
@@ -51,7 +54,7 @@ class SelectionController extends Controller
             'name'=>$request->name
 
         ]);
-
+        return response('Successfully Saved ',200 );
     } 
 
 }

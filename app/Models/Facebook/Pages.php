@@ -15,6 +15,7 @@ class Pages extends Model
         'page_access_token',
         'name',
         'page_id',
-        'img_url'
+        'img_url',
+        'status'
     ];
 }

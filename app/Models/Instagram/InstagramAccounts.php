@@ -17,7 +17,8 @@ class InstagramAccounts extends Model
         'page_id',
         'page_access_token',
         'name',
-        'profile_picture_url'
+        'profile_picture_url',
+        'status'
 
     ];
 
