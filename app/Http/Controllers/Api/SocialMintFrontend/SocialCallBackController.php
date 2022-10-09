@@ -177,7 +177,7 @@ class SocialCallBackController extends Controller
 
    
      public function discordcallback(Request $request)
-     { return 1;
+     { 
 
         $user_id=Crypt::decryptString($request->state);
 
