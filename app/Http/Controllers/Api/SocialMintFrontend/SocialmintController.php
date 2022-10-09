@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers\Api\SocialMintFrontend;
 
-use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Facebook\Pages;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\SocialMediaAccessTokens;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
-use League\OAuth1\Client\Server\Twitter;
 
 class SocialmintController extends Controller
 {
 
    
-
-
-
 
     public function AccountsData()
     { 

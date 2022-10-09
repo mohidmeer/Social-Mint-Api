@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\SocialMintFrontend\LoginUrlController;
+use App\Http\Controllers\Api\SocialMintFrontend\SocialCallBackController;
 use App\Http\Controllers\Api\SocialMintFrontend\SocialmintController;
-use App\Http\Controllers\Api\SocialMintFrontend\SocialCallBacks;
+
 use App\Models\SocialMediaAccessTokens;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 
 
 // callbackroutes no middleware
-Route::get('/twitter/callback'  ,   [SocialCallBacks::class,'twittercallback' ]);
-Route::get('/facebook/callback' ,   [SocialCallBacks::class,'facebookcallback']);
-Route::get('/instagram/callback',   [SocialCallBacks::class,'instacallback']);
-Route::get('/reddit/callback'   ,   [SocialCallBacks::class,'redditcallback']);
-Route::get('/discord/callback'  ,  [SocialCallBacks::class,'redditcallback']);
-Route::get('/pintrest/callback' , [SocialCallBacks::class,'pintrestcallback']);
+Route::get('/twitter/callback'  ,   [SocialCallBackController::class,'twittercallback' ]);
+Route::get('/facebook/callback' ,   [SocialCallBackController::class,'facebookcallback']);
+Route::get('/instagram/callback',   [SocialCallBackController::class,'instacallback']);
+Route::get('/reddit/callback'   ,   [SocialCallBackController::class,'redditcallback']);
+Route::get('/discord/callback'  ,   [SocialCallBackController::class,'redditcallback']);
+Route::get('/pintrest/callback' ,   [SocialCallBackController::class,'pintrestcallback']);
 
 // Auth Url Genarations 
 Route::get('/facebook/login'    ,[LoginUrlController::class, 'getFacebookRedirectUrl'])->middleware(['auth:sanctum']);

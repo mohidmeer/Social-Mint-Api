@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
-class SocialCallBacks extends Controller
+class SocialCallBackController extends Controller
 {
 
 
