@@ -189,7 +189,7 @@ class SocialCallBacks extends Controller
             'client_secret' =>config('services.discord.clientSecret'),
             'grant_type'    =>'authorization_code',
             'code'          =>$request->code,
-            'redirect_uri'  =>config('services.discord.WebRedirectUri')
+            'redirect_uri'  =>config('services.discord.ClientRedirectUri')
         ]);
     
     

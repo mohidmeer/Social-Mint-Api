@@ -72,7 +72,7 @@ return [
         'clientSecret'=>env('Discord_Client_Secret'),
         'RedirectUrlWeb'=>env('Discord_Redirect_Web'),
         'WebRedirectUri'=>env('Discord_Web_Uri'),
-        'ClientRedirectUri'=>env('Discord_Client_Uri'),
+        'ClientRedirectUri'=>env('DI_REDIRECTURI'),
         'RedirectUrlClient'=>env('Discord_Redirect_Client'),
     ],
 
