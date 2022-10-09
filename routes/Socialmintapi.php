@@ -15,8 +15,8 @@ Route::get('/twitter/callback'  ,   [SocialCallBacks::class,'twittercallback' ])
 Route::get('/facebook/callback' ,   [SocialCallBacks::class,'facebookcallback']);
 Route::get('/instagram/callback',   [SocialCallBacks::class,'instacallback']);
 Route::get('/reddit/callback'   ,   [SocialCallBacks::class,'redditcallback']);
-Route::get('/discord/callback'   ,   [SocialCallBacks::class,'redditcallback']);
-Route::get('/pintrest/callback'   ,   [SocialCallBacks::class,'pintrestcallback']);
+Route::get('/discord/callback'   ,  [SocialCallBacks::class,'redditcallback']);
+Route::get('/pintrest/callback'   , [SocialCallBacks::class,'pintrestcallback']);
 
 // Auth Url Genarations 
 Route::get('/facebook/login',[SocialmintController::class, 'getFacebookRedirectUrl'])->middleware(['auth:sanctum']);
@@ -37,9 +37,6 @@ Route::get('/pintrest/login',[SocialmintController::class, 'getPintrestRedirectU
 
 Route::post('/signup',[SocialmintController::class,'signup']);
 Route::get('/accounts',[SocialmintController::class,'AccountsData'])->middleware(['auth:sanctum']);
-
-
-
 
 
 Route::delete('/unlinktwitter',[SocialmintController::class,'UnlinkTwitter'])->middleware(['auth:sanctum']);
