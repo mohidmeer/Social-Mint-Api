@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
+use App\Models\Facebook\Facebook;
 use App\Models\Facebook\Pages;
+use App\Models\Instagram\Instagram;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\Pintrest\Board;
 use App\Models\Pintrest\Pintrest;
@@ -65,6 +67,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(SocialMediaAccessTokens::class);
     }
+
+    public function Facebook()
+    {
+        return $this->hasOne(Facebook::class);
+    }
+    public function Instagram()
+    {
+        return $this->hasOne(Instagram::class);
+    }
+
     public function fbpages()
     {
         return $this->hasMany(Pages::class);

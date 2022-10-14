@@ -44,8 +44,13 @@ class InstagramController extends Controller
         // IF NOT ACCESS TOKEN NOT FOUND THEN RETURN USER WITH MESSAGE
         if (isset($AccessToken['error'])){return redirect()->route('instagram')->with('error','Not Authorized Try Again Latter');}
 
-        // Updating the Access Token for Instagram
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>$AccessToken['access_token']]);
+
+
+
+
+
+
+        
 
          // Getting Instagram FacebookLinked Business Account
          $InstaAccounts=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=instagram_business_account,access_token'); 

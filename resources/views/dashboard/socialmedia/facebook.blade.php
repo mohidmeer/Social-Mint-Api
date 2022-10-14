@@ -8,12 +8,12 @@
             <div class="card">
                 <div class="card-header">
                     <strong>Facebook</strong>
-                    @isset($fbusername)
+                    @isset(Auth::user()->Facebook)
                     <small>
-                        {{$fbusername['name']}}
+                        {{Auth::user()->Facebook->name}}
                     </small>
                     @endisset
-                    @empty($fbusername)
+                    @empty(Auth::user()->Facebook->name)
                     <small>
                         Link your account
                     </small>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body">
 
-                    @isset($access_token['fb_access_token'])
+                    @isset(Auth::user()->Facebook)
                     <a href="{{route('facebookdeauthorize')}}" class="text-white btn btn-block btn-danger p-4">
                         <h2>
                             <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
@@ -30,7 +30,7 @@
                     </a>
 
                     @endisset
-                    @empty($access_token['fb_access_token'])
+                    @empty(Auth::user()->Facebook)
                     <a href="{{route('facebooklogin')}}" class="text-white btn btn-block btn-primary p-4">
                         <h2>
                             <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;</i> Login With Facebook
@@ -49,7 +49,7 @@
                 <div class="card-header">
                     <strong class="card-title">Linked Pages</strong>
                 </div>
-                @isset($pages)
+                @isset(Auth::user()->fbpages[0])
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
@@ -62,7 +62,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                @foreach ($pages as $page)
+                                @foreach (Auth::user()->fbpages as $page)
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <th><img src="{{$page->img_url}}"  class="rounded-circle " alt="No Pic"></th>
                                 <td>{{$page['name']}}</td>
@@ -88,7 +88,7 @@
                 @endisset
                 @empty(Auth::user()->fbpages[0])
                 <div class="card-body">
-                    <h2>
+                    <h2 class="text-center">
                         No Pages Found
                     </h2>
                 </div>

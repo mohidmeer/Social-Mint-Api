@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SocialMedia;
 use App\Http\Controllers\Controller;
+use App\Models\Facebook\Facebook;
 use Exception;
 use App\Models\User;
 use App\Models\SocialMediaAccessTokens;
@@ -14,17 +15,9 @@ class FacebookController extends Controller
 {
     public function index()
     {     
-        $Acc=Auth::user()->Socialtoken;
-        if (isset($Acc['fb_access_token'])){
-            $user=Http::withToken($Acc['fb_access_token'])->get('https://graph.facebook.com/me');
-            $pages= Auth::user()->fbpages;
-        }else{
-            $user=null;
-            $pages=null;
-        }
-        return view('dashboard.socialmedia.facebook',
-        ['access_token'=>$Acc,'fbusername'=>$user,'pages'=>$pages]);
-}
+       
+        return view('dashboard.socialmedia.facebook');
+    }
     public function redirectToFacebook(){
         
         $facebookauthorizeurl="https://www.facebook.com/v14.0/dialog/oauth?client_id="
@@ -45,19 +38,19 @@ class FacebookController extends Controller
 
         // IF NOT ACCESS TOKEN NOT FOUND THEN RETURN USER WITH MESSAGE
         if (isset($AccessToken['error'])){return redirect()->route('facebook')->with('success','Account Successfully Connected');}
+        
+        // MAKING CALL FOR GETTING USERNAME
+        $user=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me');
+        $avatar=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/'.$user['id'].'/picture?redirect=false&type=square');
+        
+        Facebook::create([
+            'user_id'=>Auth::user()->id,
+            'name'=>$user['name'],
+            'access_token'=>$AccessToken['access_token'],
+            'avatar'=>isset($avatar['data']['url']) ? $avatar['data']['url'] : null
+        ])->save();
 
         
-
-
-         // Checking That does current user exists in  Table Columns if not we will create new entry
-        $SocialMediaAccessToken = SocialMediaAccessTokens::where('user_id',Auth::user()->id)->first();
-
-        
-        // Saving User Facebook Access Token In Database or updating its record
-        if (isset($SocialMediaAccessToken)){SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>$AccessToken['access_token']]);}
-        else{SocialMediaAccessTokens::create(['user_id' =>  Auth::user()->id,'fb_access_token'=> $AccessToken['access_token']])->save();}
-        
-
         // Getting Pages Name And Page Respective  Access Token
         $pages=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=name,access_token');
 
@@ -88,13 +81,12 @@ class FacebookController extends Controller
 
     public function deauthorize(){
 
-        // Setting Facebook Access Tokens To Null 
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>null]);
-
+        // Deleting User Facebook account  
+        Auth::user()->Facebook->delete();
         // Deleting All Pages for user 
         Pages::where('user_id',Auth::user()->id)->delete();
 
-        return redirect()->route('facebook');
+        return redirect()->route('facebook')->with('success','Successfully Removed');
     }
 
     public function deactivate($id){
