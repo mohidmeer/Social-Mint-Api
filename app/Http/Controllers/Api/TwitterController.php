@@ -21,16 +21,16 @@ class TwitterController extends Controller
             'message' => 'required|min:3',
             'img_url' =>  'required|url' ]);
 
-         $SocialTokens=Auth::user()->Socialtoken;
-         if (!(isset($SocialTokens->tw_name))){ return response('No Twitter Account Linked');}
+         $SocialTokens=Auth::user()->Twitter;
+         if (!(isset($SocialTokens->name))){ return response('No Twitter Account Linked');}
          $status=$request->message;
          $img_url=$request->img_url;
          
 
          $connection = new TwitterOAuth(config('services.twitter.consumer_key'),
          config('services.twitter.consumer_secret'),
-         $SocialTokens->tw_access_token, 
-         $SocialTokens->tw_secret_token);
+         $SocialTokens->access_token, 
+         $SocialTokens->secret_token);
 
          try{
 
@@ -57,17 +57,12 @@ class TwitterController extends Controller
     public function PostTweet(Request $request)
     {    
         $request->validate([ 'message' => 'required|min:3']);
-         $SocialTokens=Auth::user()->Socialtoken;
+         $SocialTokens=Auth::user()->Twitter;
          $status=$request->message;
          $connection = new TwitterOAuth(config('services.twitter.consumer_key'),
          config('services.twitter.consumer_secret'),
-         $SocialTokens->tw_access_token, 
-         $SocialTokens->tw_secret_token
-          
-        
-        
-        
-        );
+         $SocialTokens->access_token, 
+         $SocialTokens->secret_token);
          $res = $connection->post("statuses/update", ["status" => $status]);
          if (!isset($res->created_at)){ return $res; }
          return $res->created_at;
@@ -89,12 +84,5 @@ class TwitterController extends Controller
 
 
 
-    public function refreshtoken(Carbon $date)
-    {
-
-        if ($date->diffInSeconds(Carbon::now()) > 7200) {
-
-            return "No";
-        }
-    }
+    
 }

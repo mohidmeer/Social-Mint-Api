@@ -2,7 +2,7 @@
 @section('content')
 @include('dashboard.socialmedia.error')
 <div class="container">
-    @isset(Auth::user()->Socialtoken['tw_name'])
+    @isset(Auth::user()->Twitter)
     <div style="height:300px ;">
     </div>
     @endisset
@@ -11,12 +11,12 @@
             <div class="card">
                 <div class="card-header">
                     <strong>Twitter</strong>
-                    @isset(Auth::user()->Socialtoken['tw_name'])
+                    @isset(Auth::user()->Twitter)
                     <small>
-                        {{Auth::user()->Socialtoken['tw_name']}}
+                        {{Auth::user()->Twitter->name}}
                     </small>
                     @endisset
-                    @empty(Auth::user()->Socialtoken['tw_name'])
+                    @empty(Auth::user()->Twitter)
                     <small>
                         Link your account
                     </small>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
 
-                    @isset( Auth::user()->Socialtoken['tw_name'] )
+                    @isset( Auth::user()->Twitter )
                     <a href="{{route('twitterdeatuthorize')}}" class="text-white btn btn-block btn-danger p-4">
                         <h2>
                             <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
@@ -33,7 +33,7 @@
                     </a>
 
                     @endisset
-                    @empty(Auth::user()->Socialtoken['tw_name'] )
+                    @empty(Auth::user()->Twitter )
                     <a href="{{route('twitterlogin')}}" class="text-white btn btn-block bg-twitter p-4">
                         <h2>
                             <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;</i> Login With twitter

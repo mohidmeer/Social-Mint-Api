@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SocialMediaAccessTokens;
 use Carbon\Carbon;
 use Abraham\TwitterOAuth\TwitterOAuth;
+use App\Models\Twitter\Twitter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -46,13 +47,14 @@ class TwitterController extends Controller
         $url_components = parse_url($url);
          parse_str($url_components['query'], $params);
         $userid=Auth::user()->id;
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)
-        ->update([
-            'tw_access_token'=>$params['oauth_token'],
-            'tw_secret_token'=>$params['oauth_token_secret'],
-            'tw_name'=>$params['screen_name'],
-        
+
+        Twitter::create([
+            'user_id'=>Auth::user()->id,
+            'access_token'=>$params['oauth_token'],
+            'secret_token'=>$params['oauth_token_secret'],
+            'name'=>$params['screen_name'],
         ]);
+       
 
        
          
@@ -61,20 +63,14 @@ class TwitterController extends Controller
    
     public function index()
     {   
-        if(!(isNull( Auth::user()->Socialtoken['tw_access_token']))){ return view('dashboard.socialmedia.twitter');}
+
 
 
         return view('dashboard.socialmedia.twitter');
     }
    
     public function deauthorize(){
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)
-        ->update([
-            'tw_access_token'=>null,
-            'tw_secret_token'=>null,
-            'tw_name'=>null,
-            
-        ]);
+        Auth::user()->Twitter->delete();
         return view ('dashboard.socialmedia.twitter');
     }
 
