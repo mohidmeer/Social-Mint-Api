@@ -42,17 +42,28 @@ class TwitterController extends Controller
         // Condition for checing if we get the access token or not 
         // if (!(isset($AccessTokens->oauth_token))){ return response($AccessTokens,404) ;}
 
-
         $url = 'https://www.g.com/r?'.$AccessTokens;
         $url_components = parse_url($url);
          parse_str($url_components['query'], $params);
         $userid=Auth::user()->id;
+
+
+        $con = new TwitterOAuth(
+            config('services.twitter.consumer_key'),
+            config('services.twitter.consumer_secret'),
+            $params['oauth_token'],
+            $params['oauth_token_secret'],
+        );
+
+        $imgurl = $con->get("users/show",['screen_name'=>$params['screen_name']]);
+        $imgurl->profile_image_url_https;
 
         Twitter::create([
             'user_id'=>Auth::user()->id,
             'access_token'=>$params['oauth_token'],
             'secret_token'=>$params['oauth_token_secret'],
             'name'=>$params['screen_name'],
+            'avatar'=>$imgurl->profile_image_url_https
         ]);
        
 

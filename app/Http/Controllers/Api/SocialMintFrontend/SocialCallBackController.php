@@ -13,6 +13,7 @@ use App\Models\Instagram\InstagramAccounts;
 use App\Models\Pintrest\Board;
 use App\Models\Pintrest\Pintrest;
 use App\Models\SocialMediaAccessTokens;
+use App\Models\Twitter\Twitter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -170,19 +171,18 @@ class SocialCallBackController extends Controller
         
  
          $imgurl = $con->get("users/show",['screen_name'=>$params['screen_name']]);
- 
-           
+         
          $imgurl->profile_image_url_https;
  
  
-         SocialMediaAccessTokens::where('user_id', $userid)
-             ->update([
-                 'tw_access_token' => $params['oauth_token'],
-                 'tw_secret_token' => $params['oauth_token_secret'],
-                 'tw_name' => $params['screen_name'],
-                 'tw_img_url'=>$imgurl->profile_image_url_https
- 
-             ]);
+         Twitter::create([
+            'user_id'=>Auth::user()->id,
+            'access_token'=>$params['oauth_token'],
+            'secret_token'=>$params['oauth_token_secret'],
+            'name'=>$params['screen_name'],
+            'avatar'=>$imgurl->profile_image_url_https
+        ]);
+
          return redirect(config('services.socialmint.redirect'), 201);
      }
 
