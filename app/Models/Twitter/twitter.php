@@ -10,6 +10,6 @@ class Twitter extends Model
     use HasFactory;
 
     protected $fillable=[
-        'user_id','access_token','secret_token','avatar'
-    ]
+        'user_id','access_token','secret_token','avatar','name'
+    ];
 }

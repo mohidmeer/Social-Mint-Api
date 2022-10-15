@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
-use function PHPUnit\Framework\isNull;
+
 
 class TwitterController extends Controller
 {
@@ -75,14 +75,12 @@ class TwitterController extends Controller
     public function index()
     {   
 
-
-
         return view('dashboard.socialmedia.twitter');
     }
    
     public function deauthorize(){
         Auth::user()->Twitter->delete();
-        return view ('dashboard.socialmedia.twitter');
+        return redirect()->route('twitter')->with('success','Removed Successfully');
     }
 
 
