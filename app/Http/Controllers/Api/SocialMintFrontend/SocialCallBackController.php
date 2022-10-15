@@ -6,7 +6,9 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use App\Http\Controllers\Controller;
 use App\Models\Discord\Channels;
 use App\Models\Discord\Discord;
+use App\Models\Facebook\Facebook;
 use App\Models\Facebook\Pages;
+use App\Models\Instagram\Instagram;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\Pintrest\Board;
 use App\Models\Pintrest\Pintrest;
@@ -42,16 +44,16 @@ class SocialCallBackController extends Controller
 
 
 
-        // Checking That does current user exists in  Table Columns if not we will create new entry
-        $SocialMediaAccessToken = SocialMediaAccessTokens::where('user_id', $userid)->first();
-
-
-        // Saving User Facebook Access Token In Database or updating its record
-        if (isset($SocialMediaAccessToken)) {
-            SocialMediaAccessTokens::where('user_id', $userid)->update(['fb_access_token' => $AccessToken['access_token']]);
-        } else {
-            SocialMediaAccessTokens::create(['user_id' =>  $userid, 'fb_access_token' => $AccessToken['access_token']])->save();
-        }
+        // MAKING CALL FOR GETTING USERNAME
+        $user=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me');
+        $avatar=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/'.$user['id'].'/picture?redirect=false&type=square');
+        
+        Facebook::create([
+            'user_id'=>$userid,
+            'name'=>$user['name'],
+            'access_token'=>$AccessToken['access_token'],
+            'avatar'=>isset($avatar['data']['url']) ? $avatar['data']['url'] : null
+        ])->save();
 
 
         // Getting Pages Name And Page Respective  Access Token
@@ -94,8 +96,19 @@ class SocialCallBackController extends Controller
             return response("Not Authorized Try Again Latter", 404);
         }
 
-        // Updating the Access Token for Instagram
-        SocialMediaAccessTokens::where('user_id', $userid)->update(['insta_access_token' => $AccessToken['access_token']]);
+
+        $user=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me');
+        $avatar=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/'.$user['id'].'/picture?redirect=false&type=square');
+
+
+        Instagram::create([
+            'user_id'=>$userid,
+            'name'=>$user['name'],
+            'access_token'=>$AccessToken['access_token'],
+            'avatar'=>isset($avatar['data']['url']) ? $avatar['data']['url'] : null
+        ])->save();
+
+       
 
         // Getting Instagram FacebookLinked Business Account
         $InstaAccounts = Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=instagram_business_account,access_token');
