@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SocialMedia;
 
 use App\Http\Controllers\Controller;
+use App\Models\Instagram\Instagram;
 use App\Models\Instagram\InstagramAccounts;
 use App\Models\SocialMediaAccessTokens;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,10 @@ class InstagramController extends Controller
 {
     public function index()
     {
-        if (empty(Auth::user()->Socialtoken['insta_access_token'])){return view('dashboard.socialmedia.instagram');}
-         $InstaAccounts=Auth::user()->instaAccounts;
-        $fbusername=Http::withToken(Auth::user()->Socialtoken['insta_access_token'])->get('https://graph.facebook.com/me');
+       
 
 
-        return view('dashboard.socialmedia.instagram',['InstaAccounts'=>$InstaAccounts,'fbusername'=>$fbusername]);
+        return view('dashboard.socialmedia.instagram');
         
     }
 
@@ -44,13 +43,18 @@ class InstagramController extends Controller
         // IF NOT ACCESS TOKEN NOT FOUND THEN RETURN USER WITH MESSAGE
         if (isset($AccessToken['error'])){return redirect()->route('instagram')->with('error','Not Authorized Try Again Latter');}
 
+        $user=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me');
+        $avatar=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/'.$user['id'].'/picture?redirect=false&type=square');
 
 
 
+        Instagram::create([
+            'user_id'=>Auth::user()->id,
+            'name'=>$user['name'],
+            'access_token'=>$AccessToken['access_token'],
+            'avatar'=>isset($avatar['data']['url']) ? $avatar['data']['url'] : null
+        ])->save();
 
-
-
-        
 
          // Getting Instagram FacebookLinked Business Account
          $InstaAccounts=Http::withToken($AccessToken['access_token'])->get('https://graph.facebook.com/me/accounts?fields=instagram_business_account,access_token'); 
@@ -83,23 +87,16 @@ class InstagramController extends Controller
     
     public function deauthorize()
     {
-        // Setting Insta Access Tokens To Null 
-        SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>null]);
-
+        // Deleting User Instagram 
+        Auth::user()->Instagram->delete();
         InstagramAccounts::where('user_id',Auth::user()->id)->delete();
-
-
-
-
-
-        return view('dashboard.socialmedia.instagram');
+        return redirect()->route('instagram')->with('success','Disconnected');
     }
     public function deactivate($id)
     {
-    // changing page Status
-    InstagramAccounts::where('id',$id)->update(['status'=>0]);
-
-    return redirect()->route('instagram');
+        // changing page Status
+        InstagramAccounts::where('id',$id)->update(['status'=>0]);
+        return redirect()->route('instagram');
     }
     public function activate($id)
     {
@@ -108,7 +105,7 @@ class InstagramController extends Controller
     }
     public function unlinkaccount($id){
 
-        // Deleting Page for user 
+        
         InstagramAccounts::where('id',$id)->delete();
 
         return redirect()->route('instagram');

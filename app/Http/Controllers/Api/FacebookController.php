@@ -8,65 +8,67 @@ use App\Http\Requests\PostFeedFacebookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
+
 class FacebookController extends Controller
 {
 
 
-    public function postPic(PostFacebookRequest $request ){
-        $Result=array();
-        $userpages=Auth::user()->fbpages;
+    public function postPic(PostFacebookRequest $request)
+    {
+        $Result = array();
 
         // Checking that does user have any linked facebook pages
-        if ( !(isset($userpages[0])) ){return response()->json(["message"=>"You Don't Have Any Linked Facebook Pages"],404);}
+        if (!(isset(Auth::user()->Facebook))) {
+            return response()->json(["message" => "You Don't Have Any Linked Facebook Account"], 404);
+        }
 
+        // Checking that does user have any linked facebook pages
+        if (!(isset(Auth::user()->fbpages))) {
+            return response()->json(["message" => "You Don't Have Any Linked Facebook Pages"], 404);
+        }
+        $userpages = Auth::user()->fbpages->where('status', 1)->get();
 
-        // Checking That Is There Any Allowed pages For Posting By User By Summing the pages Status(booleans) 
-        $disabledflag=[];foreach($userpages as $page){$disabledflage =array_push($disabledflag,$page['status']);} 
+        if ($userpages->count() == 0) {
+            return response()->json(["message" => "You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"], 404);
+        }
 
-        // if all account status sum to zero means no account is enabled by user from frontend 
-        if(array_sum($disabledflag)==0){ return response()->json(["message"=>"You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"],404);}
-
-
-
-        foreach($userpages as $page){
-            if ($page->status==0){continue;}
-            $postimageurl=Http::withToken($page['page_access_token'])
-            ->post("https://graph.facebook.com/".$page['page_id']."/photos?message=".$request->message."&url=".$request->img_url.""); 
-             $Result=Arr::add($Result,$page->name,$postimageurl->json());  
+        foreach ($userpages as $page) {
+            if ($page->status == 0) {
+                continue;
+            }
+            $postimageurl = Http::withToken($page['page_access_token'])
+                ->post("https://graph.facebook.com/" . $page['page_id'] . "/photos?message=" . $request->message . "&url=" . $request->img_url . "");
+            $Result = Arr::add($Result, $page->name, $postimageurl->json());
         }
         return $Result;
-
     }
-    public function postFeed(PostFeedFacebookRequest $request ){
-        $Result=array();
-        $userpages=Auth::user()->fbpages;
-        if ( !(isset($userpages[0])) ){return response()->json(["message"=>"You Don't Have Any Linked Facebook Pages"],404);}
+    public function postFeed(PostFeedFacebookRequest $request)
+    {
+        $Result = array();
 
-        
-        // Checking That Is There Any Allowed pages For Posting By User By Summing the pages Status(booleans) 
-        $disabledflag=[];foreach($userpages as $page){$disabledflage =array_push($disabledflag,$page['status']);} 
+        // Checking that does user have any linked facebook pages
+        if (!(isset(Auth::user()->Facebook))) {
+            return response()->json(["message" => "You Don't Have Any Linked Facebook Account"], 404);
+        }
 
-        // if all account status sum to zero means no account is enabled by user from frontend 
-        if(array_sum($disabledflag)==0){ return response()->json(["message"=>"You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"],404);}
+        // Checking that does user have any linked facebook pages
+        if (!(isset(Auth::user()->fbpages))) {
+            return response()->json(["message" => "You Don't Have Any Linked Facebook Pages"], 404);
+        }
+        $userpages = Auth::user()->fbpages->where('status', 1)->get();
 
+        if ($userpages->count() == 0) {
+            return response()->json(["message" => "You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"], 404);
+        }
 
-
-        foreach($userpages as $page){
-            if ($page->status==0){continue;}
-            $postimageurl=Http::withToken($page['page_access_token'])
-            ->post("https://graph.facebook.com/".$page['page_id']."/feed?message=".$request->message.""); 
-             $Result=Arr::add($Result,$page->name,$postimageurl->json());  
+        foreach ($userpages as $page) {
+            if ($page->status == 0) {
+                continue;
+            }
+            $postimageurl = Http::withToken($page['page_access_token'])
+                ->post("https://graph.facebook.com/" . $page['page_id'] . "/feed?message=" . $request->message . "");
+            $Result = Arr::add($Result, $page->name, $postimageurl->json());
         }
         return $Result;
-
     }
-    
-
-
-
-
-
-
-
-
 }

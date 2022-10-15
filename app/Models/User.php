@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use League\OAuth1\Client\Server\Twitter;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,11 @@ class User extends Authenticatable
     public function Socialtoken()
     {
         return $this->hasOne(SocialMediaAccessTokens::class);
+    }
+
+    public function Twitter()
+    {
+        return $this->hasOne(Twitter::class);
     }
 
     public function Facebook()

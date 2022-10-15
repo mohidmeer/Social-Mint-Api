@@ -14,12 +14,12 @@
              <div class="card">
                  <div class="card-header">
                      <strong>Instagram</strong>
-                     @isset($fbusername)
+                     @isset(Auth::user()->Instagram)
                      <small>
-                         {{$fbusername['name']}}
+                         {{Auth::user()->Instagram->name}}
                      </small>
                      @endisset
-                     @empty($fbusername)
+                     @empty(Auth::user()->Instagram)
                      <small>
                          Link your account
                      </small>
@@ -28,14 +28,14 @@
                  </div>
                  <div class="card-body">
 
-                     @isset(Auth::user()->Socialtoken['insta_access_token'])
+                     @isset(Auth::user()->Instagram)
                      <a href="{{route('instagramdeauthorize')}}" class="text-white btn btn-block btn-danger p-4">
                          <h3>
                              <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Remove Account
                          </h3>
                      </a>
                      @endisset
-                     @empty(Auth::user()->Socialtoken['insta_access_token'])
+                     @empty(Auth::user()->Instagram)
                      <a href="{{route('instagramlogin')}}" class="text-white btn btn-block bg-instagram p-4">
                          <h3>
                              <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;</i> Login With instagram
@@ -56,7 +56,7 @@
      </div>
      <div class="card-body">
          <div class="table-stats order-table ov-h">
-             @isset($InstaAccounts)
+             @isset(Auth::user()->Instagram)
              <table class="table">
                  <thead>
                      <tr>
@@ -67,7 +67,7 @@
                      </tr>
                  </thead>
                  <tbody>
-                     @foreach ($InstaAccounts as $account)
+                     @foreach (Auth::user()->instaAccounts as $account)
                      <tr>
                          <td class="serial">{{$loop->iteration}}</td>
                          <td class="avatar">
