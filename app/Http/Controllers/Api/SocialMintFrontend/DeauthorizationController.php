@@ -16,7 +16,7 @@ class DeauthorizationController extends Controller
      {
  
           // Setting Facebook Access Tokens To Null 
-          SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['fb_access_token'=>null]);
+          Auth::user()->Facebook->delete();
  
           // Deleting All Pages for user 
           Pages::where('user_id',Auth::user()->id)->delete();
@@ -28,7 +28,7 @@ class DeauthorizationController extends Controller
      {
  
          // Setting Insta Access Tokens To Null 
-         SocialMediaAccessTokens::where('user_id',Auth::user()->id)->update(['insta_access_token'=>null]);
+         Auth::user()->Instagram->delete();
  
          InstagramAccounts::where('user_id',Auth::user()->id)->delete();
  
@@ -37,13 +37,7 @@ class DeauthorizationController extends Controller
      }
      public function UnlinkTwitter()
      {
-         SocialMediaAccessTokens::where('user_id', Auth::user()->id)
-             ->update([
-                 'tw_access_token' => null,
-                 'tw_secret_token' => null,
-                 'tw_name' => null,
- 
-             ]);
+         Auth::user()->Twitter->delete();
          return response('Twitter Unlinked Successfully',200);
      }
      public function UnlinkReddit()

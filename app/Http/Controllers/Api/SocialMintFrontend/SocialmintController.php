@@ -60,7 +60,7 @@ class SocialmintController extends Controller
     
         $Facebook_Pages  =   Auth::user()->fbpages;
         $InstaAccounts   =   Auth::user()->instaAccounts;
-        $TwitterAccounts =   Auth::user()->Socialtoken;
+        $TwitterAccounts =   Auth::user()->Twitter;
         $RedditAccount   =   Auth::user()->Reditt;
         $DiscordAccount  =   Auth::user()->Discord;
         $PintrestAccount =   Auth::user()->Pintrest;        
@@ -145,9 +145,9 @@ class SocialmintController extends Controller
            
         }
 
-        if (isset($TwitterAccounts->tw_name)) {
+        if (isset($TwitterAccounts->name)) {
             $twitter["Status"] = true;
-            $twitter["Name"]   =$TwitterAccounts->tw_name;
+            $twitter["Name"]   =$TwitterAccounts->name;
           
         }
 
