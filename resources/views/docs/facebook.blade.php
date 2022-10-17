@@ -14,7 +14,7 @@
                                     <div class="card-header">
                                         <span class="badge badge-pill badge-success">Post</span>
 
-                                        <button type="button" class="close" data-toggle="collapse" data-target="#facebookfeed" aria-expanded="true" aria-controls="facebookfeed">
+                                        <button type="button" class="close" data-toggle="collapse" data-target="#facebookfeed" aria-expanded="false" aria-controls="facebookfeed">
                                             <span>
                                                 <i class="fa fa-bars"></i>
                                             </span>
@@ -24,7 +24,7 @@
                                         </small>
 
                                     </div>
-                                    <div class="collapse show" id="facebookfeed">
+                                    <div class="collapse " id="facebookfeed">
                                         <div class="card-body">
                                             <ul class=" font-weight-bold ml-4">
                                                 <li>Parameters
@@ -178,7 +178,7 @@ print(response.text)
 import requests
 import json
 
-reqUrl = "https://socialmintshare.net/api/facebook/pic"
+reqUrl = "https://socialmintshare.net/api/facebook/feed"
 
 headersList = {
  "Accept": "application/json",

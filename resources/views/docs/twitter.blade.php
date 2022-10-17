@@ -24,7 +24,7 @@
                                         </small>
 
                                     </div>
-                                    <div class="collapse show " id="twitterfeed">
+                                    <div class="collapse  " id="twitterfeed">
                                         <div class="card-body">
                                             <ul class=" font-weight-bold ml-4">
                                                 <li>Parameters

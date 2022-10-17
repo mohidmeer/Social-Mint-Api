@@ -6,6 +6,10 @@
 @include('docs.facebook')
 @include('docs.instagram')
 @include('docs.twitter')
+@include('docs.reddit')
+@include('docs.telegram')
+@include('docs.discord')
+@include('docs.pintrest')
 </div>
 <script>
     hljs.highlightAll();

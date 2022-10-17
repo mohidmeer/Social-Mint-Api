@@ -25,7 +25,7 @@
                                         </small>
 
                                     </div>
-                                    <div class="collapse show" id="instagrampic">
+                                    <div class="collapse " id="instagrampic">
                                         <div class="card-body">
                                             <ul class=" font-weight-bold ml-4">
                                                 <li>Parameters
