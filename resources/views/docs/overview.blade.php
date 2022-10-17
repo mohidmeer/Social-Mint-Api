@@ -45,9 +45,9 @@
                                                             <div class="card-body">
 
                                                                 <a class="text-white btn btn-block  bg-primary p-4">
-                                                                    <h4>
+                                                                    <h2>
                                                                         <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
-                                                                    </h4>
+                                                                    </h2>
                                                                 </a>
 
                                                             </div>
@@ -58,6 +58,17 @@
                                             </div>
                                         </li>
                                         <li><hr><strong>Instagram</strong>
+                                        <ul class="ml-3">
+                                            <li><p>Only Instagram Business accounts connected to a Facebook Page are supported</p></li>
+                                            <li><p>If you have already connected Social Mint Share with Facebook, see the following instructions.</p></li>
+                                            <ul class="ml-4">
+                                                
+                                                <li>Click Login With Instagram</li>
+                                                <li>Click Edit Settings</li>
+                                                <li>Select All Facebook pages Linked to Instagram Accounts</li>
+                                                <li>Select Instagram Accounts</li>
+                                            </ul>
+                                        </ul>
                                             <div>
                                                 <div class="row">
                                                     <div class="col-md-6 offset-2">
@@ -71,9 +82,9 @@
                                                             <div class="card-body">
 
                                                                 <a class="text-white btn btn-block bg-instagram p-4">
-                                                                    <h4>
+                                                                    <h2>
                                                                         <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
-                                                                    </h4>
+                                                                    </h2>
                                                                 </a>
 
                                                             </div>
@@ -97,9 +108,36 @@
                                                             <div class="card-body">
 
                                                                 <a class="text-white btn btn-block  bg-twitter p-4">
-                                                                    <h4>
+                                                                    <h2>
                                                                         <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
-                                                                    </h4>
+                                                                    </h2>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        <li><hr><strong>Reddit</strong>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-6 offset-2">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong>Reddit</strong>
+                                                                <small>Your Account
+
+                                                                </small>
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                                <a class="text-white btn btn-block  bg-reddit p-4">
+                                                                    <h2>
+                                                                        <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
+                                                                    </h2>
                                                                 </a>
 
                                                             </div>
