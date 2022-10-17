@@ -253,7 +253,7 @@ class SocialCallBackController extends Controller
      }
 
 
-    //  Pintrest callback
+    
     public function pintrestcallback(Request $request)
      {
         $userid = Crypt::decryptString($request->state);

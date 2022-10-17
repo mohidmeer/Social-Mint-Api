@@ -26,7 +26,7 @@ class FacebookController extends Controller
         if (!(isset(Auth::user()->fbpages))) {
             return response()->json(["message" => "You Don't Have Any Linked Facebook Pages"], 404);
         }
-        $userpages = Auth::user()->fbpages->where('status', 1)->get();
+        $userpages = Auth::user()->fbpages->where('status', 1);
 
         if ($userpages->count() == 0) {
             return response()->json(["message" => "You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"], 404);
@@ -55,7 +55,7 @@ class FacebookController extends Controller
         if (!(isset(Auth::user()->fbpages))) {
             return response()->json(["message" => "You Don't Have Any Linked Facebook Pages"], 404);
         }
-        $userpages = Auth::user()->fbpages->where('status', 1)->get();
+        $userpages = Auth::user()->fbpages->where('status', 1);
 
         if ($userpages->count() == 0) {
             return response()->json(["message" => "You Did'nt Allow Any Pages For Posting,Visit Social Mint Share"], 404);

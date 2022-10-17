@@ -42,7 +42,7 @@ class TwitterController extends Controller
 
           try{
 
-             $tweet=  $connection->post('statuses/update', ['status' => 'Testing From Laravel App','media_ids'=>$media->media_id]);
+             $tweet=  $connection->post('statuses/update', ['status' => $request->message,'media_ids'=>$media->media_id]);
             }catch (Exception $e) {return $e ->getMessage();}
 
 

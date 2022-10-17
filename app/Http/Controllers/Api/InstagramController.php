@@ -25,7 +25,7 @@ class InstagramController extends Controller
         if (!(isset(Auth::user()->instaAccounts))) {
             return response()->json(["message" => "You Don't Have Any Linked Instagram Account"], 404);
         }
-        $useraccount = Auth::user()->instaAccounts->where('status', 1)->get();
+        $useraccount = Auth::user()->instaAccounts->where('status', 1);
 
         if ($useraccount->count() == 0) {
             return response()->json(["message" => "You Did'nt Allow Any Account For Posting,Visit Social Mint Share"], 404);
