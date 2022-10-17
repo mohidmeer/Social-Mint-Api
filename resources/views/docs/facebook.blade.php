@@ -178,7 +178,7 @@ print(response.text)
 import requests
 import json
 
-reqUrl = "https://socialmintshare.net/api/facebook/feed"
+reqUrl = "https://socialmintshare.net/api/facebook/pic"
 
 headersList = {
  "Accept": "application/json",
