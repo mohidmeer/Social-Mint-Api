@@ -46,7 +46,7 @@
 
                                                                 <a class="text-white btn btn-block  bg-primary p-4">
                                                                     <h2>
-                                                                        <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
+                                                                        <i class="fa fa-facebook">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Facebook 
                                                                     </h2>
                                                                 </a>
 
@@ -83,7 +83,7 @@
 
                                                                 <a class="text-white btn btn-block bg-instagram p-4">
                                                                     <h2>
-                                                                        <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
+                                                                        <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Instagram
                                                                     </h2>
                                                                 </a>
 
@@ -109,7 +109,7 @@
 
                                                                 <a class="text-white btn btn-block  bg-twitter p-4">
                                                                     <h2>
-                                                                        <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
+                                                                        <i class="fa fa-twitter">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Twitter
                                                                     </h2>
                                                                 </a>
 
@@ -136,7 +136,88 @@
 
                                                                 <a class="text-white btn btn-block  bg-reddit p-4">
                                                                     <h2>
-                                                                        <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect
+                                                                        <i class="fa fa-reddit">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Reddit
+                                                                    </h2>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        <li><hr><strong>Telegram</strong>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-6 offset-2">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong>Telegram</strong>
+                                                                <small>Your Account
+
+                                                                </small>
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                                <a class="text-white btn btn-block  bg-telegram p-4">
+                                                                    <h2>
+                                                                        <i class="fa fa-telegram">&nbsp;&nbsp;&nbsp;&nbsp;</i>Connect Telegram
+                                                                    </h2>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        <li><hr><strong>Discord</strong>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-6 offset-2">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong>Discord</strong>
+                                                                <small>Your Account
+
+                                                                </small>
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                                <a class="text-white btn btn-block  bg-discord p-4">
+                                                                    <h2>
+                                                                        <i class="fa fa-discord">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Discord
+                                                                    </h2>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </li>
+                                        <li><hr><strong>Pintrest</strong>
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-md-6 offset-2">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <strong>Pintrest</strong>
+                                                                <small>Your Account
+
+                                                                </small>
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                                <a class="text-white btn btn-block  bg-pintrest p-4">
+                                                                    <h2>
+                                                                        <i class="fa fa-pinterest">&nbsp;&nbsp;&nbsp;&nbsp;</i>Login With Pintrest
                                                                     </h2>
                                                                 </a>
 
