@@ -1,4 +1,3 @@
-
 # API Reference
 
 ## Posting On Social Media
@@ -52,7 +51,7 @@ You wil get Page Name and Post id In response
 | Parameter | Type     |     Description                |
 | :-------- | :------- |     :------------------------- |
 | `Header` | `Authorization` | **Required**. Your API key |
-| `message` | `string` | **Required**. Your  Message |
+| `message` | `string` | **Optional**. Your  Caption |
 | `imgurl` | `url` | **Required**.     Your  Image |
 
 ### `Responses`
@@ -91,7 +90,7 @@ You wil get Page Name and Post id In response
 | Parameter | Type     |     Description                |
 | :-------- | :------- |     :------------------------- |
 | `Header` | `Authorization` | **Required**. Your API key |
-| `message` | `string` | **Required**. Your  Status |
+| `message` | `string` | **Required**. Your aption |
 | `img_url` | `url` | **Required**. Your   Image |
 
 ### `Responses`
@@ -103,6 +102,132 @@ You wil get Page Name and Post id In response
 }
 
 ```
+### Reddit
+```http
+  POST https://socialmintshare.net/api/reddit/feed
+```
+
+| Parameter | Type     |     Description                |
+| :-------- | :------- |     :------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key |
+| `title`  | `string` | **Required**. Your  title |
+| `text`   | `string` | **Required**. Your  text |
+
+### `Responses`
+You wil get a very wierd response from reddit 
+```js
+ {"jquery": [[0, 1, "call", ["body"]], [1, 2, "attr", "find"], 
+ [2, 3, "call", [".status"]], [3, 4, "attr", "hide"], [4, 5, "call", []],
+ [5, 6, "attr", "html"], [6, 7, "call", [""]], [7, 8, "attr", "end"],
+ [8, 9, "call", []], [1, 10, "attr", "redirect"], [10, 11, "call",
+ ["https://www.reddit.com/r/u_MoHiD420/comments/xo4w6y/some_titile/"]],
+ [1, 12, "attr", "find"], [12, 13, "call", ["*[name=url]"]],
+ [13, 14, "attr", "val"], [14, 15, "call", [""]], [15, 16, "attr", "end"], [16, 17, "call", []],
+ [1, 18, "attr", "find"], [18, 19, "call", ["*[name=text]"]], [19, 20, "attr", "val"],
+ [20, 21, "call", [""]], [21, 22, "attr", "end"], [22, 23, "call", []], 
+ [1, 24, "attr", "find"], [24, 25, "call", ["*[name=title]"]], 
+ [25, 26, "attr", "val"], [26, 27, "call", [" "]], [27, 28, "attr", "end"], 
+ [28, 29, "call", []]], "success": true}
+
+```
+At the end success true or false incase anything  go wrong
+### Post image on Reddit 
+```http
+  POST https://socialmintshare.net/api/reddit/pic
+```
+
+| Parameter | Type     |     Description                |
+| :-------- | :------- |     :------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key |
+| `title` | `string` | **Required**. Your caption |
+| `img_url` | `url` | **Required**. Your   Image |
+
+### `Responses`
+You wil get Something Like This 
+
+```js
+   {"jquery": [[0, 1, "call", ["body"]], [1, 2, "attr", "find"], 
+ [2, 3, "call", [".status"]], [3, 4, "attr", "hide"], [4, 5, "call", []],
+ [5, 6, "attr", "html"], [6, 7, "call", [""]], [7, 8, "attr", "end"],
+ [8, 9, "call", []], [1, 10, "attr", "redirect"], [10, 11, "call",
+ ["https://www.reddit.com/r/u_MoHiD420/comments/xo4w6y/some_titile/"]],
+ [1, 12, "attr", "find"], [12, 13, "call", ["*[name=url]"]],
+ [13, 14, "attr", "val"], [14, 15, "call", [""]], [15, 16, "attr", "end"], [16, 17, "call", []],
+ [1, 18, "attr", "find"], [18, 19, "call", ["*[name=text]"]], [19, 20, "attr", "val"],
+ [20, 21, "call", [""]], [21, 22, "attr", "end"], [22, 23, "call", []], 
+ [1, 24, "attr", "find"], [24, 25, "call", ["*[name=title]"]], 
+ [25, 26, "attr", "val"], [26, 27, "call", [" "]], [27, 28, "attr", "end"], 
+ [28, 29, "call", []]], "success": true}
+
+```
+### Posting On Telegram 
+```http
+  POST https://socialmintshare.net/api/telegram/feed
+```
+
+| Parameter | Type           | Description               |
+| :-------- | :-------       |:------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key|
+| `message` | `string`       | **Required**. Your  message|
+
+### `Responses`
+You wil get Chat id Name and User name 
+
+### Posting media On Telegram
+```http
+  POST https://socialmintshare.net/api/telegram/pic
+```
+
+| Parameter | Type     |     Description                |
+| :-------- | :------- |     :------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key |
+| `message` | `string` | **Required**. Your caption |
+| `img_url` | `url` | **Required**. Your   Image |
+
+### `Responses`
+You wil get Chat id Name and User name 
+
+### Posting On Discord
+```http
+  POST https://socialmintshare.net/api/discord/feed
+```
+
+| Parameter | Type           | Description               |
+| :-------- | :-------       |:------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key|
+| `message` | `string`       | **Required**. Your  message|
+
+### `Responses`
+
+
+### Posting media On Discord
+```http
+  POST https://socialmintshare.net/api/discord/pic
+```
+
+| Parameter | Type     |     Description                |
+| :-------- | :------- |     :------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key |
+| `message` | `string` | **Required**. Your caption |
+| `img_url` | `url` | **Required**. Your   Image |
+
+### `Responses`
+### Posting On Pintrest
+```http
+  POST https://socialmintshare.net/api/pintrest/pin
+```
+
+| Parameter | Type           | Description               |
+| :-------- | :-------       |:------------------------- |
+| `Header` | `Authorization` | **Required**. Your API key|
+| `title` | `string`         | **Required**. Title|
+| `description` | `string`   | **Required**. Description |
+| `img_url` | `string`       | **Required**. Image Url |
+
+### `Responses`
+
+
+ 
 
 
 ## `Common Error Responses`
@@ -117,14 +242,22 @@ You wil get Page Name and Post id In response
     }
 
 
-{
+
     "message": "The given data was invalid.",
     "errors": {
         "img_url": [
             "The img url field is required."
         ]
     }
-}
+
+
+    "message": "The given data was invalid.",
+    "errors": {
+        "caption": [
+            "The caption field is required."
+        ]
+    }
+
 
 ```
 #### UNAUTHENTICATED 
@@ -135,6 +268,7 @@ You wil get Page Name and Post id In response
 }
 
 ```
+Sometimes you may get a response from Social Media Platform itself about limit issues OAuth Issues or user restrictions 
 
 ## `Common Status Codes`
 
@@ -145,7 +279,6 @@ You wil get Page Name and Post id In response
 | 500 | `INTERNAL SERVER ERROR` |
 | 400 | `BAD REQUEST` |
 | 422 | `UNPROCESSABLE CONTENT` |
-
 
 
 ## `SocialMintShare Api Endpoints`
