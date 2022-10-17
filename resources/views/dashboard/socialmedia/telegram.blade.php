@@ -63,7 +63,7 @@
                     as Admin in your Channel or Group
                     Please see:
                 </p>
-                <a href="{{route('docs','#telegram')}}">
+                <a href="{{route('docs','#telegramConnect')}}">
                     <h4 class="text-danger text-center ">Detailed Instruction</h4>
                 </a>
 

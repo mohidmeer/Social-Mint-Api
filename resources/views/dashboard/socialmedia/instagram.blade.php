@@ -36,7 +36,7 @@
                      </a>
                      @endisset
                      @empty(Auth::user()->Instagram)
-                     <a href="{{route('instagramlogin')}}" class="text-white btn btn-block bg-instagram p-4">
+                     <a data-toggle="modal" data-target="#mediumModal" href="" class="text-white btn btn-block bg-instagram p-4">
                          <h3>
                              <i class="fa fa-instagram">&nbsp;&nbsp;&nbsp;</i> Login With instagram
                          </h3>
@@ -103,7 +103,39 @@
      </div>
      @endempty
 
+<!-- MODal -->
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="mediumModalLabel">Instagram</h4>
 
+            </div>
+            <div class="modal-body">
+                <p class="text-dark">
+                  Only Instagram Business accounts connected to a Facebook Page are supported.
+                  Please see:
+                </p>
+                <a href="{{route('docs','#InstagramConnect')}}">
+                    <h4 class="text-danger text-center ">Detailed Instruction</h4>
+                </a>
+
+                <p class="text-dark mt-1">
+                    You will be ask to login with facebook <br>
+                    Make Sure to select Instagram Accounts with Facebook Pages 
+                </p>
+                
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a type="submit" href="{{route('instagramlogin')}}"  form="myform" class="btn btn-success">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODal -->
 
 
 
