@@ -25,8 +25,9 @@ class SocialCallBackController extends Controller
 
     public function facebookcallback(Request $request)
     {
+        $stateArr= explode(',',$request->state);
 
-        $userid = Crypt::decryptString($request->state);
+        $userid = Crypt::decryptString($stateArr[0]);
 
         // Making URL For Exchanging Code For Facebook Access Token
         $AccessTokenUrl = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" . env('facebook_client_id') . "&client_secret=" . env('facebook_client_secret') . "&redirect_uri=http://localhost:8000/api/socialmintshare/facebook/callback&code=" . $request->code . "";
@@ -79,13 +80,14 @@ class SocialCallBackController extends Controller
             $i=0;
         }
 
-        return redirect(config('services.socialmint.redirect'), 201);
+        return redirect($stateArr[1], 201);
     }
 
    
     public function instacallback(Request $request)
     {
-        $userid = Crypt::decryptString($request->state);
+        $stateArr= explode(',',$request->state);
+        $userid = Crypt::decryptString($stateArr[0]);
         // Making URL For Exchanging Code For Facebook Access Token
         $AccessTokenUrl = "https://graph.facebook.com/v14.0/oauth/access_token?client_id=" . env('facebook_client_id') . "&client_secret=" . env('facebook_client_secret') . "&redirect_uri=http://localhost:8000/api/socialmintshare/instagram/callback&code=" . $request->code . "";
 
@@ -141,14 +143,15 @@ class SocialCallBackController extends Controller
         }
 
 
-        return redirect(config('services.socialmint.redirect'), 201);
+        return redirect($stateArr[1], 201);
     }
 
 
      public function twittercallback(Request $request)
      {
+         $stateArr= explode(',',$request->state);
          // finding user by id
-         $userid = Crypt::decryptString($request->state);
+         $userid = Crypt::decryptString($stateArr[0]);
  
          $AccessTokens = Http::post("https://api.twitter.com/oauth/access_token?oauth_token=" . $request->oauth_token . "&oauth_verifier=" . $request->oauth_verifier . "");
  
@@ -183,7 +186,7 @@ class SocialCallBackController extends Controller
             'avatar'=>$imgurl->profile_image_url_https
         ]);
 
-         return redirect(config('services.socialmint.redirect'), 201);
+         return redirect($stateArr[1], 201);
      }
 
 
@@ -198,8 +201,8 @@ class SocialCallBackController extends Controller
    
      public function discordcallback(Request $request)
      { 
-
-        $user_id=Crypt::decryptString($request->state);
+        $stateArr= explode(',',$request->state);
+        $user_id=Crypt::decryptString($stateArr[0]);
 
         // Exchange Code For Access Tokens 
     
@@ -249,14 +252,15 @@ class SocialCallBackController extends Controller
           $i=0;
         }
     
-        return redirect(config('services.socialmint.redirect'), 201);
+        return redirect($stateArr[1], 201);
      }
 
 
     
     public function pintrestcallback(Request $request)
      {
-        $userid = Crypt::decryptString($request->state);
+        $stateArr= explode(',',$request->state);
+        $userid = Crypt::decryptString($stateArr[0]);
 
         $AccessTokenUrl = 'https://api.pinterest.com/v5/oauth/token';
 
@@ -294,7 +298,7 @@ class SocialCallBackController extends Controller
             $i=0;
         }
 
-        return redirect(config('services.socialmint.redirect'), 201);
+        return redirect($stateArr[1], 201);
      }
  
 }

@@ -72,8 +72,8 @@ class RedittController extends Controller
         
         if (isset($request->error)){return response($request->error, 404);}
 
-
-        $userid = User::find(Crypt::decryptString($request->state))->id;
+        $stateArr= explode(',',$request->state);
+        $userid = Crypt::decryptString($stateArr[0]);
         
 
         $AccessToken=Http::withBasicAuth(config('services.reddit.client_id'),config('services.reddit.client_secret'))
@@ -96,7 +96,7 @@ class RedittController extends Controller
         ]);
 
 
-        return redirect(config('services.socialmint.redirect'), 201);
+        return redirect($stateArr[1], 201);
 
 
     }

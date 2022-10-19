@@ -13,21 +13,30 @@ class LoginUrlController extends Controller
 
 
     
-    public function getFacebookRedirectUrl()
+    public function getFacebookRedirectUrl(Request $request)
     {
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
 
-        $URL=config('services.authorizeurls.facebook').Crypt::encryptString(Auth::user()->id);
-        return response($URL,200) ;
+        $URL=config('services.authorizeurls.facebook').Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
+        return response($URL,200);
     }
-    public function getInstagramRedirectUrl()
+    public function getInstagramRedirectUrl(Request $request)
     {
-        $URL=config('services.authorizeurls.instagram').Crypt::encryptString(Auth::user()->id);
-        return response($URL,200) ;
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
+        $URL=config('services.authorizeurls.instagram').Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
+        return response($URL,200);
         
     }
-    public function getTwitterRedirectUrl()
+    public function getTwitterRedirectUrl(Request $request)
     {
-        $state = Crypt::encryptString(Auth::user()->id);
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
+        $state = Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
         $connection = new TwitterOAuth(
             config('services.twitter.consumer_key'),
             config('services.twitter.consumer_secret'),
@@ -38,20 +47,29 @@ class LoginUrlController extends Controller
 
         return response('https://api.twitter.com/oauth/authorize?oauth_token=' . $oauth_token, 200);
     }
-    public function getRedditRedirectUrl()
+    public function getRedditRedirectUrl(Request $request)
     {
-        $URL=config('services.authorizeurls.reddit').Crypt::encryptString(Auth::user()->id);
-        return response($URL,200) ;
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
+        $URL=config('services.authorizeurls.reddit').Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
+        return response($URL,200);
     }
-    public function getDiscordRedirectUrl()
+    public function getDiscordRedirectUrl(Request $request)
     {
-        $URL=config('services.authorizeurls.discord').Crypt::encryptString(Auth::user()->id);
-        return response($URL,200) ;
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
+        $URL=config('services.authorizeurls.discord').Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
+        return response($URL,200);
     }
-    public function getPintrestRedirectUrl()
+    public function getPintrestRedirectUrl(Request $request)
     {
-        $URL=config('services.authorizeurls.pintrest').Crypt::encryptString(Auth::user()->id);
-        return response($URL,200) ;
+        $request->validate([
+            'redirect_uri' => 'required|url'
+        ]);
+        $URL=config('services.authorizeurls.pintrest').Crypt::encryptString(Auth::user()->id).','.$request->redirect_uri;
+        return response($URL,200);
     }
 
 
