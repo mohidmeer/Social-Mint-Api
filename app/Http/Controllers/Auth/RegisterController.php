@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\SocialMediaAccessTokens;
+use App\Models\ApiRequests;
+use App\Models\RequestLimit;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,7 +76,10 @@ class RegisterController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
         $user->api_access_token = $token;
         $user->save();
-        SocialMediaAccessTokens::create([
+        ApiRequests::create([
+            'user_id' => $user['id'],
+        ])->save();
+        RequestLimit::create([
             'user_id' => $user['id'],
         ])->save();
       

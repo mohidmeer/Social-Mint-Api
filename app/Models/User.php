@@ -65,11 +65,15 @@ class User extends Authenticatable
     //     'profile_photo_url',
     // ];
 
-    public function Socialtoken()
-    {
-        return $this->hasOne(SocialMediaAccessTokens::class);
+
+    public function Limit(){
+        return $this->hasOne(RequestLimit::class); 
+    }
+    public function RequestsMade(){
+        return $this->hasOne(ApiRequests::class); 
     }
 
+    
     public function Twitter()
     {
         return $this->hasOne(Twitter::class);

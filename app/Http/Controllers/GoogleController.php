@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApiRequests;
+use App\Models\RequestLimit;
 use App\Models\SocialMediaAccessTokens;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
@@ -42,10 +44,12 @@ class GoogleController extends Controller
                 $token = $newUser->createToken('auth_token')->plainTextToken;
                 $newUser->api_access_token = $token;
                 $newUser->save();
-                SocialMediaAccessTokens::create([
+                ApiRequests::create([
                     'user_id' => $newUser['id'],
                 ])->save();
-
+                RequestLimit::create([
+                    'user_id' => $newUser['id'],
+                ])->save();
       
                 return redirect()->intended('home');
             }

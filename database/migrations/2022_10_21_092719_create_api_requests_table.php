@@ -17,13 +17,13 @@ class CreateApiRequestsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('facebook')->default(0);
-            $table->unsignedBigInteger('instagram')->default(0);
-            $table->unsignedBigInteger('twitter')->default(0);
-            $table->unsignedBigInteger('reddit')->default(0);
-            $table->unsignedBigInteger('pintrest')->default(0);
-            $table->unsignedBigInteger('telegram')->default(0);
-            $table->unsignedBigInteger('discord')->default(0);
+            $table->unsignedBigInteger('facebook')  ->default(0);
+            $table->unsignedBigInteger('instagram') ->default(0);
+            $table->unsignedBigInteger('twitter')   ->default(0);
+            $table->unsignedBigInteger('reddit')    ->default(0);
+            $table->unsignedBigInteger('pintrest')  ->default(0);
+            $table->unsignedBigInteger('telegram')  ->default(0);
+            $table->unsignedBigInteger('discord')   ->default(0);
             $table->timestamps();
         });
     }
