@@ -44,11 +44,7 @@ class SocialmintController extends Controller
         ApiRequests::create([
             'user_id' => $user['id'],
         ])->save();
-        RequestLimit::create([
-            'user_id' => $user['id'],
-            'allocated'=> 1000000000,
-            'plan'=>'Premium'
-        ])->save();
+        
         
         return response(["Bearer_Token" => $token], 201);
     }

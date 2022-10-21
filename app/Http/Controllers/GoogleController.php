@@ -47,9 +47,7 @@ class GoogleController extends Controller
                 ApiRequests::create([
                     'user_id' => $newUser['id'],
                 ])->save();
-                RequestLimit::create([
-                    'user_id' => $newUser['id'],
-                ])->save();
+               
       
                 return redirect()->intended('home');
             }

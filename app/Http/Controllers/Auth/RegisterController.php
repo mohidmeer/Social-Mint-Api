@@ -79,10 +79,7 @@ class RegisterController extends Controller
         ApiRequests::create([
             'user_id' => $user['id'],
         ])->save();
-        RequestLimit::create([
-            'user_id' => $user['id'],
-        ])->save();
-      
+       
 
         return $user;
         
