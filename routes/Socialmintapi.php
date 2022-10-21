@@ -32,6 +32,7 @@ Route::get('/pintrest/login'    ,[LoginUrlController::class, 'getPintrestRedirec
 
 
 Route::post('/signup',[SocialmintController::class,'signup']);
+
 Route::get('/accounts',[SocialmintController::class,'AccountsData'])->middleware(['auth:sanctum']);
 
 

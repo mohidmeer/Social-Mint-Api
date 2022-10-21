@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\SocialMintFrontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApiRequests;
+use App\Models\RequestLimit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +18,12 @@ class SocialmintController extends Controller
 
     public function signup(Request $request)
     {
-        $username = $request->user['result']['name'];
-        $email    = $request->user['result']['email'];
+        $request->validate([
+            'username'=>'required',
+            'useremail'=>'required|email'
+        ]);
+        $username = $request->username;
+        $email    = $request->useremail;
         $password = "ANYTHINGRANDOM";
 
         //  WE will return the user if already exsists
@@ -35,6 +41,14 @@ class SocialmintController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
         $user->api_access_token = $token;
         $user->save();
+        ApiRequests::create([
+            'user_id' => $user['id'],
+        ])->save();
+        RequestLimit::create([
+            'user_id' => $user['id'],
+            'allocated'=> 1000000000,
+            'plan'=>'Premium'
+        ])->save();
         
         return response(["Bearer_Token" => $token], 201);
     }

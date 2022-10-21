@@ -12,6 +12,8 @@ class RequestLimit extends Model
 
     protected $fillable = [
         'user_id',
-         'limit',
+         'allocated',
+         'utilized' ,
+         'plan'
     ];
 }
