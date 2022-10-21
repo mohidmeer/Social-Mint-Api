@@ -50,6 +50,7 @@ class InstagramController extends Controller
                 $postimg = Http::withToken($account['page_access_token'])->post($containerpublishurl);
                 $Result = Arr::add($Result, $account->name, $postimg->json());
             }
+            Auth::user()->RequestsMade->increment('instagram');
         }
         return $Result;
     }

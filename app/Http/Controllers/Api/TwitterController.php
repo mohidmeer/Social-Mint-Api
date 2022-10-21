@@ -44,7 +44,7 @@ class TwitterController extends Controller
              $tweet=  $connection->post('statuses/update', ['status' => $request->message,'media_ids'=>$media->media_id]);
             }catch (Exception $e) {return $e ->getMessage();}
 
-
+            Auth::user()->RequestsMade->increment('twitter');
          return $tweet;
 
     }
@@ -64,6 +64,7 @@ class TwitterController extends Controller
          $SocialTokens->secret_token);
          $res = $connection->post("statuses/update", ["status" => $status]);
          if (!isset($res->created_at)){ return $res; }
+         Auth::user()->RequestsMade->increment('twitter');
          return $res->created_at;
 
     }

@@ -60,6 +60,7 @@ class RedditController extends Controller
             'sr'   =>'u_'.$reddit->name,
             'kind' =>'self'
         ]);
+        Auth::user()->RequestsMade->increment('reddit');
 
         return $res;
     }
@@ -101,6 +102,7 @@ class RedditController extends Controller
             'sr'   =>'u_'.$reddit->name,
             'kind' =>'link'
         ]);
+        Auth::user()->RequestsMade->increment('reddit');
         
         return $res;
 

@@ -55,6 +55,7 @@ class PintrestController extends Controller
                     "url"=> $request->img_url
                 ]
              ]);
+             Auth::user()->RequestsMade->increment('pintrest');
              $Result = Arr::add($Result, $Board->name, $req->json());
 
         }

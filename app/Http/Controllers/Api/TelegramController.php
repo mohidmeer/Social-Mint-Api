@@ -25,7 +25,7 @@ class TelegramController extends Controller
         .config('services.telegram.key').'/sendMessage?chat_id='.$chat_id.'&text='.$request->message.'';
 
         $sendMessageTelegram=Http::get($url);
-
+        Auth::user()->RequestsMade->increment('telegram');
         return response($sendMessageTelegram,200);
 
     }
@@ -46,7 +46,7 @@ class TelegramController extends Controller
         .config('services.telegram.key').'/sendPhoto?chat_id='.$chat_id.'&caption='.$request->message.'&photo='.$request->img_url.'';
 
         $sendMessageTelegram=Http::get($url);
-
+        Auth::user()->RequestsMade->increment('telegram');
         return response($sendMessageTelegram,200);
 
 

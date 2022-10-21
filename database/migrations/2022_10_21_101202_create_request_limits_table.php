@@ -15,9 +15,10 @@ class CreateRequestLimitsTable extends Migration
     {
         Schema::create('request_limits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')                    ;
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('limit')->default(25);
+            $table->unsignedBigInteger('allocated')->default(25)     ;
+            $table->unsignedBigInteger('utilized')->default(0)       ;
             $table->timestamps();
         });
     }

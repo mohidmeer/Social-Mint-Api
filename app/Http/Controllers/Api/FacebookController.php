@@ -39,6 +39,7 @@ class FacebookController extends Controller
             $postimageurl = Http::withToken($page['page_access_token'])
                 ->post("https://graph.facebook.com/" . $page['page_id'] . "/photos?message=" . $request->message . "&url=" . $request->img_url . "");
             $Result = Arr::add($Result, $page->name, $postimageurl->json());
+            Auth::user()->RequestsMade->increment('facebook');
         }
         return $Result;
     }
@@ -68,6 +69,7 @@ class FacebookController extends Controller
             $postimageurl = Http::withToken($page['page_access_token'])
                 ->post("https://graph.facebook.com/" . $page['page_id'] . "/feed?message=" . $request->message . "");
             $Result = Arr::add($Result, $page->name, $postimageurl->json());
+            Auth::user()->RequestsMade->increment('facebook');
         }
         return $Result;
     }

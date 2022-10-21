@@ -34,6 +34,7 @@ class DiscordController extends Controller
                 ]);
 
             $Result = Arr::add($Result, $Channel->name, $Req->json());
+            Auth::user()->RequestsMade->increment('discord');
         }
 
         return response($Result, 200);
@@ -68,7 +69,7 @@ class DiscordController extends Controller
                     'content' => $request->img_url
 
                 ]);
-
+            Auth::user()->RequestsMade->increment('discord');
             $Result = Arr::add($Result, $Channel->name, $Req->json());
         }
 
