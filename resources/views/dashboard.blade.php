@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="row px-5">
+    
     <div class="col-lg-3 col-md-6 ">
         <div class="card">
             <div class="card-body">
@@ -135,26 +136,6 @@
     </div>
 
 </div>
-<div class="row px-5">
-<div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class=" align-content-center">Remaining Limit</h4>
-                </div>
-                <div class="card-body">
-                    <div class="progress-box progress-1">
-                        <!-- <h4 class="por-title">Requests</h4> -->
-                        <div class="por-txt"> {{Auth::user()->Limit->limit}} </div>
-                        <div class="progress mb-2" style="height: 5px;">
-                            <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 4%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div> <!-- /.card -->
-            </div>
-        </div>
-
-</div>
-
 
 
 
