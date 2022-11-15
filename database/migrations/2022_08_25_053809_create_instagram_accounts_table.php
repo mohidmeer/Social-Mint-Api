@@ -18,7 +18,7 @@ class CreateInstagramAccountsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name');
-            $table->string('profile_picture_url')->nullable();
+            $table->text('profile_picture_url')->nullable();
             $table->unsignedBigInteger('insta_business_id');
             $table->text('page_id');
             $table->text('page_access_token');
