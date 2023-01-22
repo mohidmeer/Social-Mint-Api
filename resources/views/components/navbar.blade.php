@@ -34,7 +34,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">Logout</a></li>
+                        document.getElementById('logout-form').submit();">Logout</a> <a class="dropdown-item" href="{{ route('portal') }}">Billing Portal</a></li>
+                        <li></li>
                     </ul>
                 </li>
                 @endguest

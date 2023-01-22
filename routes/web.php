@@ -5,6 +5,7 @@ use App\Http\Controllers\FrontPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SocialMedia\DiscordController;
 use App\Http\Controllers\SocialMedia\FacebookController;
 use App\Http\Controllers\SocialMedia\InstagramController;
@@ -12,7 +13,10 @@ use App\Http\Controllers\SocialMedia\TwitterController;
 use App\Http\Controllers\SocialMedia\RedittController;
 use App\Http\Controllers\SocialMedia\TelegramController;
 use App\Http\Controllers\SocialMedia\PintrestController;
+use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\Discord\Discord;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -27,20 +31,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/docs', function () {
-    return view('docs');
-})->name('docs');
-
-Route::get('/privacy-policy', function () {
-    return view('privacypolicy');
-})->name('privacypolicy');
-Route::get('/termsofservice', function () {
-    return view('termsofservice');
-})->name('termsofsevice');
-
+Route::get('/', function () {return view('welcome');});
+Route::get('/docs', function () {return view('docs');})->name('docs');
+Route::get('/privacy-policy', function () {return view('privacypolicy');})->name('privacypolicy');
+Route::get('/termsofservice', function () {return view('termsofservice');})->name('termsofsevice');
+Route::get('/billing-portal', function (Request $request) { return $request->user()->redirectToBillingPortal(); })->name('portal');
 
 
 
@@ -62,6 +57,18 @@ Route::get('/home/pintrest/callback', [PintrestController::class, 'handlePintres
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/plans', [PlanController::class, 'index'])->name('pricing');
+    Route::get('/billing-portal', [PlanController::class, 'billingPortal'])->name('portal');
+    Route::get('/plans/{id}', [PlanController::class, 'show'])->name('plan.show');
+    Route::post('/plans/subscribe', [SubscriptionController::class, 'subscribe'])->name("subscription.create");
+    Route::get('/subscriptions/{name}/cancel', [SubscriptionController::class, 'cancel'])->name("subscription.cancel");
+    Route::get('/subscriptions/{name}/resume', [SubscriptionController::class, 'resume'])->name("subscription.resume");
+    Route::get('/subscriptions', [SubscriptionController::class, 'index'])->name("subscription");
+   ;
+
+
+
     Route::get('/home/api', [FrontApiController::class, 'index'])->name('api');
     Route::get('/home/post', [FrontPostController::class, 'index'])->name('post');
 
@@ -119,6 +126,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home/discord/deactivate/{id}', [DiscordController::class, 'deactivate'])->name('discorddeactivate');
     Route::get('home/discord/activate/{id}', [DiscordController::class, 'activate'])->name('discordactivate');
     Route::get('home/discord/unlink/{id}', [DiscordController::class, 'unlink'])->name('unlinkchannel');
+
+
+
    
 
 

@@ -67,14 +67,13 @@ $style= (request()->is('home/facebook' ))
             <li>
                 <!-- <a href="{{route('post')}}"> <i class="menu-icon ti-share"></i>Post</a> -->
             </li>
-            <li class="menu-title">Manage Users Users</li><!-- /.menu-title -->
+            <li class="menu-title">Billing</li><!-- /.menu-title -->
             <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Accounts</a>
-                <ul class="sub-menu children dropdown-menu">
-                    <li><i class="fa fa-puzzle-piece "></i><a href="">Add New</a></li>
-                    <li><i class="fa fa-id-badge"></i><a href="">Edit</a></li>
-
-                </ul>
+                <a href="{{route('pricing')}}"> <i class="menu-icon fa fa-cogs"></i>Plans</a>
+                
+            </li>
+            <li class="menu-item-has-children dropdown">
+                <a href="{{route('subscription')}}"> <i class="menu-icon fa fa-cogs"></i>Subscriptions</a>
             </li>
 
             </ul>

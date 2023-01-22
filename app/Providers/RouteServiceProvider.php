@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            Route::prefix('api/')
+            Route::prefix('api/socialmint')
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/SocialMediaApi.php'));
