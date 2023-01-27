@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
   
 
 // All Social Media Api Routes Here
+
+
 Route::middleware(['auth:sanctum','subscribed','logger'])->group(function () {
 
     Route::post('facebook/pic',[FacebookController::class, 'postPic']);

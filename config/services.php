@@ -91,6 +91,10 @@ return [
         'reddit'=>env('REDDIT_LOGIN_URL'),
         'discord'=>env('DISCORD_LOGIN_URL'),
         'pintrest'=>env('PINTREST_LOGIN_URL'),
+    ],
+    'stripe'=>[
+        'key'=>env('STRIPE_KEY'),
+        'secret'=>env('STRIPE_SECRET'),
     ]
 
 
